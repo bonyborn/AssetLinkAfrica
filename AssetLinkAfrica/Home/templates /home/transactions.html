@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History | Flex Leasing</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Flex Leasing</h2>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="listings.html">My Listings</a></li>
+                <li><a href="transactions.html" class="active">Transactions</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="login.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <header>
+                <h2>Transaction History</h2>
+                <input type="text" id="search" placeholder="Search transactions..." onkeyup="filterTransactions()">
+            </header>
+
+            <section class="transactions">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Item</th>
+                            <th>Amount (KES)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-table">
+                        <tr>
+                            <td>2025-03-20</td>
+                            <td>#TXN001</td>
+                            <td>Toyota Corolla Lease</td>
+                            <td>15,000</td>
+                            <td class="status completed">Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2025-03-18</td>
+                            <td>#TXN002</td>
+                            <td>Land in Kiambu</td>
+                            <td>50,000</td>
+                            <td class="status pending">Pending</td>
+                        </tr>
+                        <tr>
+                            <td>2025-03-15</td>
+                            <td>#TXN003</td>
+                            <td>Mazda Demio Lease</td>
+                            <td>12,500</td>
+                            <td class="status failed">Failed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function filterTransactions() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let table = document.getElementById("transaction-table");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(input)) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? "" : "none";
+            }
+        }
+    </script>
+
+</body>
+                                                   </html>

@@ -21,3 +21,13 @@ def post_listings(request):
 
 def details(request):
     return render(request, 'details.html')
+
+def settings(request):
+    return render(request, 'settings.html')
+
+def signup(request):
+    return render(request, 'signup.html')
+
+def login(request):
+    return render(request, 'login.html')
+    

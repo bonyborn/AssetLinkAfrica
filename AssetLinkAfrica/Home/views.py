@@ -12,4 +12,12 @@ def dashboard(request):
 
 def transactions(request):
     return render(request, 'transactions.html')
-  
+
+def listings(request):
+    return render(request, 'listings.html')
+    
+def post_listings(request):
+    return render(request, 'post_listings.html')
+
+def details(request):
+    return render(request, 'details.html')

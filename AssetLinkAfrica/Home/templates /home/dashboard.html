@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Flex Leasing</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Flex Leasing</h2>
+            <ul>
+                <li><a href="dashboard.html" class ="active">Dashboard</a></li>
+                <li><a href="listings.html">Listings</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <header>
+                <h2>Welcome, User</h2>
+                <a href="post_listing.html" class="btn">Post New Listing</a>
+            </header>
+
+            <section class="leases">
+                <h3>My Active Leases</h3>
+                <div class="listing-grid">
+                    <div class="listing-card">
+                        <img src="assets/car1.jpg" alt="Leased Car">
+                        <h3>Toyota Corolla</h3>
+                        <p>Leased until: May 2025</p>
+                        <a href="#" class="btn">Manage</a>
+                    </div>
+                    <div class="listing-card">
+                        <img src="assets/land1.jpg" alt="Leased Land">
+                        <h3>Kiambu Land</h3>
+                        <p>Leased until: December 2025</p>
+                        <a href="#" class="btn">Manage</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

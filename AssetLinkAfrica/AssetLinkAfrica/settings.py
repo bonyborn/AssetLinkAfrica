@@ -120,3 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIR = "os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR/ "staticfiles"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#Trusted origins
+CSRF = TRUSTED_ORIGINS = [
+    "https://localhost:8000",
+     "http://localhost:8000"
+]

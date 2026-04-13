@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post New Listing | Flex Leasing</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Flex Leasing</h2>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="listings.html" class="active">Listings</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="login.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <header>
+                <h2>Post a New Listing</h2>
+            </header>
+
+            <section class="post-listing">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <label for="type">Listing Type:</label>
+                    <select id="type" name="type" required>
+                        <option value="car">Car Lease</option>
+                        <option value="land">Land Lease</option>
+                    </select>
+
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter title" required>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" placeholder="Describe the listing..." required></textarea>
+
+                    <label for="price">Price (KES):</label>
+                    <input type="number" id="price" name="price" placeholder="Enter price" required>
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" placeholder="Enter location" required>
+
+                    <label for="image">Upload Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+
+                    <button type="submit" class="btn">Post Listing</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

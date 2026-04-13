@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Flex Leasing</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Flex Leasing</h2>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="listings.html">Listings</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+                <li><a href="login.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <header>
+                <h2>Account Settings</h2>
+            </header>
+
+            <section class="settings">
+                <form action="#" method="POST">
+                    <h3>Profile Information</h3>
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter full name" required>
+
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" required>
+
+                    <label for="password">New Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter new password">
+
+                    <h3>Leasing Preferences</h3>
+                    <label for="preferences">Preferred Leasing:</label>
+                    <select id="preferences" name="preferences">
+                        <option value="cars">Cars</option>
+                        <option value="land">Land</option>
+                        <option value="both">Both</option>
+                    </select>
+
+                    <button type="submit" class="btn">Save Changes</button>
+                </form>
+
+                <hr>
+
+                <form action="#" method="POST">
+                    <h3>Delete Account</h3>
+                    <p><strong>Warning:</strong> This action cannot be undone.</p>
+                    <button type="submit" class="btn danger">Delete Account</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

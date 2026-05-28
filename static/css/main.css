@@ -1,0 +1,36 @@
+.logo-container {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.logo-link {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+
+}
+
+.logo-image {
+
+    width: 45px;
+    height: 45px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+}
+
+.logo-text {
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #0F172A;
+
+}

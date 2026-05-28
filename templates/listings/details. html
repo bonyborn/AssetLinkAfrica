@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+{{ listing.title }}
+{% endblock %}
+
+{% block content %}
+
+<section class="details-page">
+
+    <div class="details-container">
+
+        <img src="{{ listing.image.url }}"
+             alt="{{ listing.title }}">
+
+        <div class="details-content">
+
+            <h1>
+                {{ listing.title }}
+            </h1>
+
+            <p>
+                {{ listing.description }}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                {{ listing.location }}
+            </p>
+
+            <p>
+                <strong>Price:</strong>
+                KES {{ listing.price }}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ listing.category }}
+            </p>
+
+            <form action="/bookings/create/{{ listing.id }}/"
+                  method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="btn">
+
+                    Book Listing
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,50 +1,18 @@
 {% extends 'base/base.html' %}
 
-{% block title %}
-Register
-{% endblock %}
-
 {% block content %}
 
-<section class="auth-page">
+<h2>Create Account</h2>
 
-    <div class="auth-container">
+<form method="POST">
+    {% csrf_token %}
 
-        <h2>
-            Create Account
-        </h2>
+    <input name="username" placeholder="Username">
+    <input name="email" placeholder="Email">
+    <input type="password" name="password1" placeholder="Password">
+    <input type="password" name="password2" placeholder="Confirm Password">
 
-        <form method="POST">
-
-            {% csrf_token %}
-
-            <input type="text"
-                   name="username"
-                   placeholder="Username">
-
-            <input type="email"
-                   name="email"
-                   placeholder="Email">
-
-            <input type="password"
-                   name="password1"
-                   placeholder="Password">
-
-            <input type="password"
-                   name="password2"
-                   placeholder="Confirm Password">
-
-            <button type="submit"
-                    class="btn">
-
-                Register
-
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
+    <button type="submit">Register</button>
+</form>
 
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>My Bookings</h2>
+
+{% for booking in bookings %}
+
+<div>
+    <h3>{{ booking.listing.title }}</h3>
+    <p>Status: {{ booking.status }}</p>
+
+    <a href="{% url 'checkout' booking.id %}">
+        Proceed Payment
+    </a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

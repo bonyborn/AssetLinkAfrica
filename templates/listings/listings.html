@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>All Listings</h2>
+
+<form method="GET">
+    <input name="q" placeholder="Search">
+    <select name="category">
+        <option value="">All</option>
+        <option value="car">Car</option>
+        <option value="land">Land</option>
+    </select>
+    <button>Filter</button>
+</form>
+
+<div class="grid">
+
+{% for listing in listings %}
+
+<div class="card">
+
+    <img src="{{ listing.image.url }}">
+
+    <h3>{{ listing.title }}</h3>
+    <p>{{ listing.location }}</p>
+    <p>KES {{ listing.price }}</p>
+
+    <a href="{% url 'details' listing.id %}">
+        View
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Payment Successful
+{% endblock %}
+
+{% block content %}
+
+<section class="status-page success">
+
+    <div class="status-card">
+
+        <h1>
+            Payment Successful
+        </h1>
+
+        <p>
+            Your booking has been confirmed.
+        </p>
+
+        <a href="/dashboard/"
+           class="btn">
+
+            Go to Dashboard
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,77 +1,23 @@
 {% extends 'base/base.html' %}
 
-{% block title %}
-Checkout
-{% endblock %}
-
 {% block content %}
 
-<section class="checkout-page">
+<h2>Checkout</h2>
 
-    <div class="checkout-container">
+<h3>{{ booking.listing.title }}</h3>
 
-        <div class="checkout-summary">
+<p>KES {{ booking.listing.price }}</p>
 
-            <h2>
-                Booking Summary
-            </h2>
+<form method="POST">
+    {% csrf_token %}
 
-            <img src="{{ booking.listing.image.url }}"
-                 alt="{{ booking.listing.title }}">
+    <select name="payment_method">
+        <option value="mpesa">M-Pesa</option>
+        <option value="card">Card</option>
+        <option value="bank">Bank Transfer</option>
+    </select>
 
-            <h3>
-                {{ booking.listing.title }}
-            </h3>
-
-            <p>
-                {{ booking.listing.location }}
-            </p>
-
-            <span>
-                KES {{ booking.listing.price }}
-            </span>
-
-        </div>
-
-        <div class="checkout-payment">
-
-            <form method="POST">
-
-                {% csrf_token %}
-
-                <h3>
-                    Payment Method
-                </h3>
-
-                <select name="payment_method">
-
-                    <option value="mpesa">
-                        M-Pesa
-                    </option>
-
-                    <option value="card">
-                        Card
-                    </option>
-
-                    <option value="bank">
-                        Bank Transfer
-                    </option>
-
-                </select>
-
-                <button type="submit"
-                        class="btn">
-
-                    Pay Now
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</section>
+    <button>Pay Now</button>
+</form>
 
 {% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Create Listing
+{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-container">
+
+        <h2>
+            Create Listing
+        </h2>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit"
+                    class="btn">
+
+                Publish Listing
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

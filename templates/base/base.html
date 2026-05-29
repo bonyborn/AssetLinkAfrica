@@ -44,8 +44,8 @@
               <span>{{ request.user.username }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item text-center bg-success" href="{% url 'profile' %}">
-                Profile</a>
+              <li><a class="dropdown-item text-center bg-success" href="">
+                User</a>
               </li>
               <li><hr class="dropdown-divider"></li>
                 <form method="post" action="{% url 'logout' %}">

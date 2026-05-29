@@ -2,15 +2,28 @@ import uuid
 
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
 
 from bookings.models import Booking
 
 from .models import Payment
 
 
+@login_required
 def checkout(request, id):
 
-    booking = Booking.objects.get(id=id)
+    booking = get_object_or_404(
+        Booking,
+        id=id,
+        user=request.user
+    )
+
+    if booking.status == 'approved':
+        messages.info(request, 'This booking has already been paid.')
+        return redirect('payment_success')
 
     if request.method == 'POST':
 
@@ -19,20 +32,16 @@ def checkout(request, id):
         )
 
         Payment.objects.create(
-
             booking=booking,
-
             amount=booking.listing.price,
-
             payment_method=payment_method,
-
             transaction_id=str(uuid.uuid4()),
-
             is_paid=True
         )
 
         booking.status = 'approved'
-
+        booking.listing.status = 'booked'
+        booking.listing.save()
         booking.save()
 
         return redirect('payment_success')
@@ -44,6 +53,7 @@ def checkout(request, id):
     )
 
 
+@login_required
 def payment_success(request):
 
     return render(

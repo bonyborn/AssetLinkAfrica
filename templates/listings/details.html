@@ -12,9 +12,15 @@
 
 <p>KES {{ listing.price }}</p>
 
+{% if can_book %}
 <form method="POST" action="{% url 'create_booking' listing.id %}">
     {% csrf_token %}
     <button>Book Now</button>
 </form>
+{% elif not user.is_authenticated %}
+<p><a href="{% url 'login' %}">Log in</a> to book this listing.</p>
+{% else %}
+<p>This listing is not available for booking.</p>
+{% endif %}
 
 {% endblock %}

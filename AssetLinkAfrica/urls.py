@@ -13,6 +13,11 @@ urlpatterns = [
     path('', include('core.urls')),
 
     path(
+        'users/',
+        include('users.urls')
+    ),
+
+    path(
         'listings/',
         include('listings.urls')
     ),

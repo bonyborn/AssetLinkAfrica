@@ -7,6 +7,14 @@
 <form method="POST">
     {% csrf_token %}
 
+    {% if messages %}
+        <div class="form-notice">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
 

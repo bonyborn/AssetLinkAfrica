@@ -7,8 +7,14 @@
 <form method="POST">
     {% csrf_token %}
 
-    <input name="username" placeholder="Username">
-    <input name="email" placeholder="Email">
+    {% if form.errors %}
+        <div class="form-errors">
+            {{ form.errors.as_ul }}
+        </div>
+    {% endif %}
+
+    <input name="username" placeholder="Username" value="{{ form.username.value }}">
+    <input name="email" placeholder="Email" value="{{ form.email.value }}">
     <input type="password" name="password1" placeholder="Password">
     <input type="password" name="password2" placeholder="Confirm Password">
 

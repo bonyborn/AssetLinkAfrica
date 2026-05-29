@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect
 
@@ -20,7 +21,11 @@ def register_view(request):
 
             login(request, user)
 
+            messages.success(request, 'Account created successfully.')
+
             return redirect('home')
+
+        messages.error(request, 'Please fix the errors below.')
 
     else:
 
@@ -53,6 +58,8 @@ def login_view(request):
 
             return redirect('dashboard')
 
+        messages.error(request, 'Invalid username or password.')
+
     return render(
         request,
         'users/login.html'
@@ -62,5 +69,7 @@ def login_view(request):
 def logout_view(request):
 
     logout(request)
+
+    messages.success(request, 'You have been logged out.')
 
     return redirect('home')

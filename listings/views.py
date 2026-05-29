@@ -82,8 +82,17 @@ def details(request, id):
         id=id
     )
 
+    can_book = (
+        request.user.is_authenticated and
+        listing.status == 'available' and
+        listing.owner != request.user
+    )
+
     return render(
         request,
         'listings/details.html',
-        {'listing': listing}
-  )
+        {
+            'listing': listing,
+            'can_book': can_book
+        }
+    )

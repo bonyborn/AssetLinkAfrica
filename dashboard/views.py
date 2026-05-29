@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from listings.models import Listing
 from bookings.models import Booking
+from payments.models import Payment
 
 
 @login_required
@@ -16,16 +17,17 @@ def dashboard(request):
         user=request.user
     )
 
+    payments = Payment.objects.filter(
+        booking__user=request.user
+    )
+
     context = {
-
         'listings': listings,
-
         'bookings': bookings,
-
+        'payments': payments,
         'listing_count': listings.count(),
-
-        'booking_count': bookings.count()
-
+        'booking_count': bookings.count(),
+        'payment_count': payments.count(),
     }
 
     return render(

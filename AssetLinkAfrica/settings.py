@@ -26,6 +26,9 @@ SECRET_KEY = "django-insecure-3-ib*k)z!5ty788wwf^h058yy3vbcytcd2=hf_)4b5-50nmh#j
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = [
+    'https://localhost:8000',
+]
 
 
 # Application definition
@@ -121,6 +124,8 @@ USE_I18N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 # files files
 # Static files (CSS, JavaScript, Images)

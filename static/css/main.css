@@ -1,36 +1,132 @@
-.logo-container {
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Base Styles (Mobile First) */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.navbar-brand-logo {
+    height: 36px;
+    width: auto;
+    border-radius: 12px;
+}
+
+.navbar-menu {
+    display: none; /* Hidden by default for mobile */
+}
+
+/* Hero Section */
+.bg-hero {
+    background-image: url('images/hero.png'); /* Replace with the path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px; /* Default height for mobile */
     display: flex;
     align-items: center;
-
+    justify-content: center;
+    color: #fff;
+    text-align: center;
 }
 
-.logo-link {
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    text-decoration: none;
-
+.bg-hero h1 {
+    font-size: 1.5rem;
+    padding: 0.5rem;
 }
 
-.logo-image {
-
-    width: 45px;
-    height: 45px;
-
-    object-fit: cover;
-
-    border-radius: 8px;
-
+/* How Section */
+.bg-how {
+    background-image: url(''); /* Replace with the path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 1rem;
+    text-align: center;
 }
 
-.logo-text {
+/* Media Queries for Larger Screens */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
 
-    font-size: 20px;
-    font-weight: 700;
+    .navbar-menu {
+        display: flex; /* Show navbar menu on larger screens */
+        gap: 1rem;
+    }
 
-    color: #0F172A;
+    .bg-hero {
+        height: 300px; /* Increase height for tablets and up */
+    }
 
+    .bg-hero h1 {
+        font-size: 2rem;
+    }
 }
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .bg-hero {
+        height: 400px; /* Increase height for desktops */
+    }
+
+    .bg-hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+
+    .bg-hero {
+        height: 500px; /* Increase height for large desktops */
+    }
+
+    .bg-hero h1 {
+        font-size: 3rem;
+    }
+    }

@@ -27,9 +27,9 @@
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link text-white" href="">Home</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="">Listings</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url '/' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'listings' %}">Listings</a></li>
       </ul>
       <!-- Profile/Account section aligned to top right -->
       <div class="d-flex align-items-center gap-2 ms-auto">
@@ -43,7 +43,7 @@
               <span>{{ request.user.username }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item text-center bg-success" href="">
+              <li><a class="dropdown-item text-center bg-success" href="{% url 'users' %}">
                 User</a>
               </li>
               <li><hr class="dropdown-divider"></li>

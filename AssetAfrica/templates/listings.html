@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssetLinkAfrica - Browse Listings</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <img src="../assets/logo.png " class="logo">
+                    <span>AssetLink<span class="highlight">Africa</span></span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listings.html" class="active">Listings</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="login.html" class="btn-login">Login</a></li>
+                </ul>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header" style="margin-top: 80px; background: var(--light-bg); padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h1>All Listings</h1>
+            <p>Browse through our comprehensive collection of cars and land properties</p>
+        </div>
+    </section>
+
+    <section class="listings-page" style="padding: 60px 0;">
+        <div class="container">
+            <div class="listings-layout" style="display: grid; grid-template-columns: 280px 1fr; gap: 2rem;">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar" style="background: var(--white); padding: 1.5rem; border-radius: 12px; box-shadow: var(--shadow); height: fit-content; position: sticky; top: 100px;">
+                    <h3>Filters</h3>
+                    <form id="filterForm">
+                        <div class="filter-group" style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Asset Type</label>
+                            <select id="filterAssetType" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="all">All</option>
+                                <option value="car">Cars</option>
+                                <option value="land">Land</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Transaction Type</label>
+                            <select id="filterTransactionType" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="all">All</option>
+                                <option value="lease">Lease</option>
+                                <option value="sale">Sale</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Price Range</label>
+                            <select id="filterPriceRange" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="all">All</option>
+                                <option value="0-50000">Ksh0 - Ksh50,000</option>
+                                <option value="50000-100000">Ksh50,000 - Ksh100,000</option>
+                                <option value="100000-500000">Ksh100,000 - Ksh500,000</option>
+                                <option value="500000+">Ksh500,000+</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Location</label>
+                            <input type="text" id="filterLocation" placeholder="City or country" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
+                        </div>
+                        <button type="submit" class="btn-apply-filters" style="width: 100%; padding: 0.75rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer;">Apply Filters</button>
+                        <button type="reset" class="btn-reset-filters" style="width: 100%; padding: 0.75rem; background: #f0f0f0; border: none; border-radius: 8px; cursor: pointer;">Reset</button>
+                    </form>
+                </aside>
+
+                <!-- Listings Grid -->
+                <div class="listings-content">
+                    <div class="listings-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <p class="results-count" id="resultsCount">Showing 6 listings</p>
+                        <div class="sort-options">
+                            <label>Sort by:</label>
+                            <select id="sortBy" style="margin-left: 0.5rem; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="newest">Newest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="listings-grid" id="allListings">
+                        <div class="listing-card" data-type="car" data-transaction="lease" data-price="500">
+                            <div class="listing-image">
+                                <img src="../assets/images.jpg" alt="Mercedes">
+                                <span class="listing-type car">Car</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>2023 Mercedes-Benz S-Class</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                                <p class="price">Ksh35000/day <span>or Ksh200,000/month</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction lease">For Lease</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" data-type="car" data-transaction="sale" data-price="35000">
+                            <div class="listing-image">
+                                <img src="../assets/images (1).jpg" alt="Honda">
+                                <span class="listing-type car">Car</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>2021 Honda Civic</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                                <p class="price">Ksh 4.7M<span>One-time payment</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction sale">For Sale</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" data-type="land" data-transaction="lease" data-price="3000">
+                            <div class="listing-image">
+                                <img src="../assets/download.jpg" alt="Farm Land">
+                                <span class="listing-type land">Land</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>Agricultural Farmland</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</p>
+                                <p class="price">TSH 3M/month <span>Long-term lease</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction lease">For Lease</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" data-type="land" data-transaction="sale" data-price="150000">
+                            <div class="listing-image">
+                                <img src="../assets/download (1).jpg" alt="Beach Land">
+                                <span class="listing-type land">Land</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>Beachfront Property</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</p>
+                                <p class="price">Ksh 1.5M <span>Outright Sale</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction sale">For Sale</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" data-type="car" data-transaction="lease" data-price="300">
+                            <div class="listing-image">
+                                <img src="../assets/bmw X5.jpg" alt="BMW">
+                                <span class="listing-type car">Car</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>2022 BMW X5</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                                <p class="price">Ksh 27000/day <span>or Ksh 80,000/month</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction lease">For Lease</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-card" data-type="land" data-transaction="lease" data-price="5000">
+                            <div class="listing-image">
+                                <img src="../assets/industrialzone.jpg" alt="Industrial Land">
+                                <span class="listing-type land">Land</span>
+                            </div>
+                            <div class="listing-content">
+                                <h3>Industrial Zone Land</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Addis Ababa, Ethiopia</p>
+                                <p class="price">ETB 775,000/month <span>Lease</span></p>
+                                <div class="listing-footer">
+                                    <a href="details.html" class="btn-details">View Details</a>
+                                    <span class="transaction lease">For Lease</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About AssetLinkAfrica</h3>
+                    <p>Connecting Africans with premium cars and land listings for lease or purchase.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="listings.html">Listings</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Cars for Lease</a></li>
+                        <li><a href="#">Cars for Sale</a></li>
+                        <li><a href="#">Land for Lease</a></li>
+                        <li><a href="#">Land for Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +254 759 919 826</li>
+                        <li><i class="fas fa-envelope"></i> info@assetlinkafrica.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AssetLinkAfrica. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

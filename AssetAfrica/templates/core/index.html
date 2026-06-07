@@ -1,0 +1,318 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Home | AssetLinkAfrica
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">
+                🚗 Real Estate & Automotive Marketplace
+            </span>
+
+            <h1>
+                Discover Cars & Land Across Africa
+            </h1>
+
+            <p>
+                Lease, rent, and purchase verified properties
+                and vehicles from trusted owners.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/listings/"
+                   class="primary-btn">
+
+                    Explore Listings
+
+                </a>
+
+                <a href="/listings/create/"
+                   class="secondary-btn">
+
+                    Add Listing
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SEARCH SECTION -->
+<section class="search-section">
+
+    <div class="search-container">
+
+        <form method="GET"
+              action="/listings/"
+              class="search-form">
+
+            <div class="search-group">
+
+                <input type="text"
+                       name="q"
+                       placeholder="Search cars, land, locations...">
+
+            </div>
+
+            <div class="search-group">
+
+                <select name="category">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    <option value="car">
+                        Cars
+                    </option>
+
+                    <option value="land">
+                        Land
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="search-group">
+
+                <input type="text"
+                       name="location"
+                       placeholder="Location">
+
+            </div>
+
+            <button type="submit"
+                    class="search-btn">
+
+                Search
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section">
+
+    <div class="section-header">
+
+        <h2>
+            Why Choose AssetLinkAfrica
+        </h2>
+
+        <p>
+            Secure and modern leasing platform
+            designed for Africa.
+        </p>
+
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔍
+            </div>
+
+            <h3>
+                Smart Search
+            </h3>
+
+            <p>
+                Quickly find cars and land listings
+                using advanced filtering.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🛡️
+            </div>
+
+            <h3>
+                Verified Listings
+            </h3>
+
+            <p>
+                All listings go through moderation
+                and verification.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💳
+            </div>
+
+            <h3>
+                Secure Payments
+            </h3>
+
+            <p>
+                Integrated payment workflows
+                for seamless transactions.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📱
+            </div>
+
+            <h3>
+                Mobile Friendly
+            </h3>
+
+            <p>
+                Fully responsive experience
+                across all devices.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- LATEST LISTINGS -->
+<section class="latest-listings">
+
+    <div class="section-header">
+
+        <h2>
+            Latest Listings
+        </h2>
+
+        <a href="/listings/"
+           class="view-all-btn">
+
+            View All
+
+        </a>
+
+    </div>
+
+    <div class="listings-grid">
+
+        {% for listing in latest_listings %}
+
+        <div class="listing-card">
+
+            <div class="listing-image">
+
+                <img src="{{ listing.image.url }}"
+                     alt="{{ listing.title }}">
+
+            </div>
+
+            <div class="listing-content">
+
+                <span class="listing-category">
+
+                    {{ listing.category }}
+
+                </span>
+
+                <h3>
+                    {{ listing.title }}
+                </h3>
+
+                <p class="listing-location">
+
+                    📍 {{ listing.location }}
+
+                </p>
+
+                <div class="listing-footer">
+
+                    <span class="listing-price">
+
+                        KES {{ listing.price }}
+
+                    </span>
+
+                    <a href="/listings/{{ listing.id }}/"
+                       class="details-btn">
+
+                        Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-listings">
+
+            <h3>
+                No Listings Available
+            </h3>
+
+            <p>
+                Listings will appear here once added.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+
+    <div class="cta-container">
+
+        <h2>
+            Ready to List Your Asset?
+        </h2>
+
+        <p>
+            Join thousands of users leasing
+            vehicles and properties across Africa.
+        </p>
+
+        <a href="/users/register/"
+           class="cta-btn">
+
+            Get Started
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

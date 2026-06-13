@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}About | AssetLinkAfrica{% endblock %}
+
+{% block head %}
+<style>
+    .about-page {
+        background: #f5f5f5;
+        padding: 80px 0;
+    }
+    .about-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .mission-vision {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    .mission-card, .vision-card, .value-card, .team-member {
+        background: #f8f9fa;
+        border-radius: 16px;
+        padding: 1.75rem;
+    }
+    .mission-card i, .vision-card i, .value-card i, .team-member i {
+        font-size: 2.5rem;
+        color: #2c5f2d;
+        margin-bottom: 1rem;
+    }
+    .values-grid, .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+    .stat-item {
+        background: linear-gradient(135deg, #2c5f2d, #1e3a1f);
+        color: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-page">
+    <div class="container">
+        <div class="about-card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1>About AssetLinkAfrica</h1>
+                <p style="font-size: 1.1rem; max-width: 720px; margin: 0.75rem auto 0;">
+                    Transforming the way Africans connect with premium automotive and real estate assets through trust, transparency, and technology.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h2>Our Story</h2>
+                <p>Founded in 2024, AssetLinkAfrica was born from a simple observation: finding reliable cars and land across Africa should not be difficult. Existing marketplaces were fragmented, confusing and often lacked trust.</p>
+                <p>We built a platform that brings together verified vehicle and land listings in one place, giving users a modern and secure way to lease, buy, or sell assets across the continent.</p>
+            </div>
+
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p>To empower African communities with a trusted marketplace for cars and land, making asset access simpler and more transparent.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p>To be Africa's most trusted asset platform, connecting people with the right vehicles and properties while supporting local economic growth.</p>
+                </div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <h2>Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Trust</h4>
+                        <p>Honest transactions and verified listings are the foundation of everything we do.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Security</h4>
+                        <p>Protecting your data and ensuring safe interactions is our top priority.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Community</h4>
+                        <p>We build for Africans, supporting growth across local markets and cities.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Innovation</h4>
+                        <p>We constantly improve our platform to make asset leasing and sales easier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <h2>Leadership Team</h2>
+                <div class="team-grid">
+                    <div class="team-member" style="text-align: center;">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Michael Okafor</h3>
+                        <p>CEO & Founder</p>
+                        <p>Driven by a passion for African asset access and digital trust.</p>
+                    </div>
+                    <div class="team-member" style="text-align: center;">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Fatima Hassan</h3>
+                        <p>CTO</p>
+                        <p>Leading our platform architecture and product innovation.</p>
+                    </div>
+                    <div class="team-member" style="text-align: center;">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>James Mwangi</h3>
+                        <p>COO</p>
+                        <p>Focused on operations, customer experience, and growth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2>Trusted by Thousands</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>10,000+</h3>
+                        <p>Active Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1,000+</h3>
+                        <p>Transactions</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Cities Covered</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>98%</h3>
+                        <p>Customer Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

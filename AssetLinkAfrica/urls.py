@@ -12,6 +12,9 @@ urlpatterns = [
 
     path('', include('core.urls')),
 
+    # user auth routes (register/login/logout)
+    path('', include('users.urls')),
+
     path(
         'listings/',
         include('listings.urls')

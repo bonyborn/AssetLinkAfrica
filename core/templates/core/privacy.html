@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Privacy Policy | AssetLinkAfrica{% endblock %}
+
+{% block head %}
+<style>
+    .policy-page {
+        padding: 80px 0;
+        background: #f5f5f5;
+    }
+    .policy-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .policy-card h2 {
+        margin-top: 1.75rem;
+        color: #2c5f2d;
+    }
+    .info-box, .warning-box, .contact-box {
+        border-radius: 16px;
+        padding: 1.25rem;
+        margin: 1rem 0;
+    }
+    .info-box {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+    }
+    .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+    }
+    .contact-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+    .policy-list {
+        margin-left: 1.25rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="policy-page">
+    <div class="container">
+        <div class="policy-card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1>Privacy Policy</h1>
+                <p style="color: #666; margin-top: 0.75rem;">Last Updated: January 1, 2026</p>
+                <p>Your privacy matters. This policy explains how AssetLinkAfrica collects and uses your information.</p>
+            </div>
+
+            <h2>1. Introduction</h2>
+            <p>AssetLinkAfrica is committed to protecting your privacy and being transparent about our data practices.</p>
+            <div class="info-box">
+                <strong>Our Commitment:</strong> We keep your information secure and only use it to support our services.
+            </div>
+
+            <h2>2. Information We Collect</h2>
+            <p>We collect information to deliver and improve our services:</p>
+            <ul class="policy-list">
+                <li>Account details like name, email, and phone number</li>
+                <li>Listing information such as asset details and photos</li>
+                <li>Usage data including visits, searches, and page interactions</li>
+                <li>Payment and transaction records</li>
+            </ul>
+
+            <h2>3. How We Use Your Information</h2>
+            <p>We use data to operate the platform, improve the experience, and keep you informed.</p>
+
+            <h2>4. Sharing Information</h2>
+            <p>We never sell your personal data. We share information only with trusted service providers and when required by law.</p>
+
+            <h2>5. Cookies and Tracking</h2>
+            <p>Cookies help us personalize your experience and analyze site traffic. You can control cookie settings in your browser.</p>
+
+            <h2>6. Data Security</h2>
+            <p>We use industry-standard safeguards to protect your information, but no system is completely secure.</p>
+
+            <h2>7. Your Rights</h2>
+            <ul class="policy-list">
+                <li>Access your personal data</li>
+                <li>Request corrections</li>
+                <li>Ask us to delete your information</li>
+                <li>Opt out of marketing communications</li>
+            </ul>
+
+            <h2>8. Contact Us</h2>
+            <div class="contact-box">
+                <p>If you have questions about this policy, email us at <strong>info@assetlinkafrica.com</strong>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

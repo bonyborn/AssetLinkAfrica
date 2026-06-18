@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import Listing
 
 
@@ -8,11 +9,4 @@ class ListingForm(forms.ModelForm):
 
         model = Listing
 
-        fields = [
-            'title',
-            'description',
-            'category',
-            'price',
-            'location',
-            'image'
-        ]
+        fields = ["title", "description", "category", "price", "location", "image"]

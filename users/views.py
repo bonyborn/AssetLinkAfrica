@@ -1,17 +1,13 @@
 from django.contrib import messages
-from django.shortcuts import render
-from django.shortcuts import redirect
-
-from django.contrib.auth import login
-from django.contrib.auth import logout
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
 
 from .forms import RegisterForm
 
 
 def register_view(request):
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
         form = RegisterForm(request.POST)
 
@@ -21,55 +17,44 @@ def register_view(request):
 
             login(request, user)
 
-            messages.success(request, 'Account created successfully.')
+            messages.success(request, "Account created successfully.")
 
-            return redirect('home')
+            return redirect("home")
 
-        messages.error(request, 'Please fix the errors below.')
+        messages.error(request, "Please fix the errors below.")
 
     else:
 
         form = RegisterForm()
 
-    return render(
-        request,
-        'users/register.html',
-        {'form': form}
-    )
+    return render(request, "users/register.html", {"form": form})
 
 
 def login_view(request):
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
-        username = request.POST.get('username')
+        username = request.POST.get("username")
 
-        password = request.POST.get('password')
+        password = request.POST.get("password")
 
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        user = authenticate(request, username=username, password=password)
 
         if user:
 
             login(request, user)
 
-            return redirect('dashboard')
+            return redirect("dashboard")
 
-        messages.error(request, 'Invalid username or password.')
+        messages.error(request, "Invalid username or password.")
 
-    return render(
-        request,
-        'users/login.html'
-    )
+    return render(request, "users/login.html")
 
 
 def logout_view(request):
 
     logout(request)
 
-    messages.success(request, 'You have been logged out.')
+    messages.success(request, "You have been logged out.")
 
-    return redirect('home')
+    return redirect("home")

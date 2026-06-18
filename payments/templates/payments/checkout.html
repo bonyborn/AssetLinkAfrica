@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>Checkout</h2>
+
+<h3>{{ booking.listing.title }}</h3>
+
+<p>KES {{ booking.listing.price }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <select name="payment_method">
+        <option value="mpesa">M-Pesa</option>
+        <option value="card">Card</option>
+        <option value="bank">Bank Transfer</option>
+    </select>
+
+    <button>Pay Now</button>
+</form>
+
+{% endblock %}

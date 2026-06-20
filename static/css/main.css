@@ -33,21 +33,15 @@ body {
     padding: 0 20px;
 }
 
-/* Navbar */
-.navbar {
-    background: var(--white);
+/* Navbar (scoped as .site-navbar for custom branding) */
+.site-navbar {
+    background: var(--white) !important;
     box-shadow: var(--shadow);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    padding: 1rem 0;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0.5rem 0;
 }
 
 .nav-brand a {
@@ -102,25 +96,16 @@ body {
     color: var(--white) !important;
 }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--text-dark);
-    margin: 3px 0;
-    transition: var(--transition);
+/* Page Content */
+.page-content {
+    margin-top: 80px;
 }
 
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a1f 100%);
     color: var(--white);
-    padding: 150px 0 100px;
+    padding: 100px 0 80px;
     text-align: center;
 }
 
@@ -913,30 +898,6 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        background: var(--white);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-menu ul {
-        flex-direction: column;
-        padding: 2rem;
-    }
-    
     .hero-content h1 {
         font-size: 2rem;
     }

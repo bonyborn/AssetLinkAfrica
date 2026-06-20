@@ -3,25 +3,6 @@
 // ======================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
-        if (hamburger) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    }));
-
     // Search functionality
     const searchForm = document.getElementById('searchForm');
     if (searchForm) {
@@ -262,16 +243,17 @@ function filterListings(assetType, transactionType, priceRange, location) {
         listing.style.display = show ? 'block' : 'none';
     });
 }
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const tabs = document.querySelectorAll('.tab-btn');
-    
-    if (loginForm && registerForm) {
-        loginForm.classList.add('active');
-        registerForm.classList.remove('active');
-        tabs[0].classList.add('active');
-        tabs[1].classList.remove('active');
-    }
+
+// Initialize login/register forms
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const tabs = document.querySelectorAll('.tab-btn');
+
+if (loginForm && registerForm) {
+    loginForm.classList.add('active');
+    registerForm.classList.remove('active');
+    tabs[0].classList.add('active');
+    tabs[1].classList.remove('active');
 }
 
 function showRegister() {
@@ -347,17 +329,27 @@ function showSale() {
     }
 }
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
-});
 
-}); // End DOMContentLoaded
+    // Initialize login/register forms
+    const loginFormInit = document.getElementById('loginForm');
+    const registerFormInit = document.getElementById('registerForm');
+    const tabsInit = document.querySelectorAll('.tab-btn');
+
+    if (loginFormInit && registerFormInit) {
+        loginFormInit.classList.add('active');
+        registerFormInit.classList.remove('active');
+        if (tabsInit[0]) tabsInit[0].classList.add('active');
+        if (tabsInit[1]) tabsInit[1].classList.remove('active');
+    }
 
 console.log('AssetLinkAfrica frontend loaded successfully!');

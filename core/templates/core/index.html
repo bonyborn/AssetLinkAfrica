@@ -13,8 +13,8 @@ Home | AssetLinkAfrica
                     <h1>Find Your Perfect <span class="highlight">Car</span> or <span class="highlight">Land</span> in Africa</h1>
                     <p>AssetLinkAfrica connects you with premium automotive and real estate listings for lease or purchase. Your one-stop platform for asset acquisition.</p>
                     <div class="hero-buttons">
-                        <a href="listings.html" class="btn-primary">Browse Listings</a>
-                        <a href="login.html" class="btn-secondary">List Your Asset</a>
+                        <a href="{% url 'listings' %}" class="btn-primary">Browse Listings</a>
+                        <a href="{% url 'login' %}" class="btn-secondary">List Your Asset</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ Home | AssetLinkAfrica
                             <p class="price">Ksh5000/day <span>or Ksh 150,000/month</span></p>
                             <p class="description">Luxury SUV with leather seats, navigation, and off-road capabilities.</p>
                             <div class="listing-footer">
-                                <a href="details.html" class="btn-details">View Details</a>
+                                <a href="{% url 'details' 1 %}" class="btn-details">View Details</a>
                                 <span class="transaction lease">For Lease</span>
                             </div>
                         </div>
@@ -99,7 +99,7 @@ Home | AssetLinkAfrica
                             <p class="price">Ksh4.5M <span>One-time payment</span></p>
                             <p class="description">Electric sedan, autopilot, premium interior, 350km range.</p>
                             <div class="listing-footer">
-                                <a href="details.html" class="btn-details">View Details</a>
+                                <a href="{% url 'details' 1 %}" class="btn-details">View Details</a>
                                 <span class="transaction sale">For Sale</span>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ Home | AssetLinkAfrica
                             <p class="price">Ksh200,000/month <span>Lease</span></p>
                             <p class="description">5000 sqm, perfect for shopping mall or office complex. Close to CBD.</p>
                             <div class="listing-footer">
-                                <a href="details.html" class="btn-details">View Details</a>
+                                <a href="{% url 'details' 1%}" class="btn-details">View Details</a>
                                 <span class="transaction lease">For Lease</span>
                             </div>
                         </div>
@@ -134,14 +134,14 @@ Home | AssetLinkAfrica
                             <p class="price">UGX80M <span>Outright Sale</span></p>
                             <p class="description">1200 sqm, titled land, ready for construction, near international school.</p>
                             <div class="listing-footer">
-                                <a href="details.html" class="btn-details">View Details</a>
+                                <a href="{% url 'details' 1 %}" class="btn-details">View Details</a>
                                 <span class="transaction sale">For Sale</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="view-all">
-                    <a href="listings.html" class="btn-outline">View All Listings <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'listings' %}" class="btn-outline">View All Listings <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>

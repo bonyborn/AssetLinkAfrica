@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block title %}
 Home | AssetLinkAfrica
@@ -71,7 +72,7 @@ Home | AssetLinkAfrica
                 <div class="listings-grid" id="featuredListings">
                     <div class="listing-card" data-type="car" data-transaction="lease" data-price="500">
                         <div class="listing-image">
-                            <img src="../assets/suv.jpg" alt="Luxury SUV">
+                            <img src="{% static 'Images/suv.jpg' %}" alt="Luxury SUV">
                             <span class="listing-type car">Car</span>
                             <span class="listing-badge featured">Featured</span>
                         </div>

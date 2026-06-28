@@ -1,79 +1,200 @@
 {% extends 'base/base.html' %}
 
-{% block title %}
-Dashboard
-{% endblock %}
+{% block title %}AssetLinkAfrica - Dashboard{% endblock title %}
 
 {% block content %}
+<section class="dashboard-page" style="margin-top: 80px; padding: 40px 0;">
+    <div class="container">
+        <div class="dashboard-layout" style="display: grid; grid-template-columns: 280px 1fr; gap: 2rem;">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar" style="background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 2rem 1rem; height: fit-content; position: sticky; top: 100px;">
+                <div class="user-profile" style="text-align: center; margin-bottom: 2rem;">
+                    <img src="https://via.placeholder.com/80x80/2c5f2d/ffffff?text=BB" alt="User Avatar" class="avatar" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                    <h3>Bony Born</h3>
+                    <p>bony.born@example.com</p>
+                    <span class="user-badge" style="display: inline-block; padding: 0.25rem 0.75rem; background: var(--secondary-color); color: white; border-radius: 20px; font-size: 0.75rem; margin-top: 0.5rem;">Premium Member</span>
+                </div>
+                <nav class="dashboard-nav" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="#" class="nav-link active" data-tab="overview" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-tachometer-alt"></i> Overview
+                    </a>
+                    <a href="#" class="nav-link" data-tab="listings" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-list"></i> My Listings
+                    </a>
+                    <a href="#" class="nav-link" data-tab="bookings" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-calendar-check"></i> My Bookings
+                    </a>
+                    <a href="#" class="nav-link" data-tab="messages" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-envelope"></i> Messages
+                        <span class="badge" style="margin-left: auto; background: var(--secondary-color); padding: 0.125rem 0.5rem; border-radius: 20px; font-size: 0.75rem;">3</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="wishlist" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </a>
+                    <a href="#" class="nav-link" data-tab="settings" style="padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </nav>
+                <a href="{% url 'home' %}" class="btn-logout" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; margin-top: 2rem; color: #dc3545; text-decoration: none; border-radius: 8px;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </aside>
 
-<section class="dashboard-page">
+            <!-- Main Content -->
+            <div class="dashboard-content" style="background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 2rem;">
+                <!-- Overview Tab -->
+                <div id="overview" class="dashboard-tab active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                        <div class="stat-card" style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-car" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <div class="stat-info">
+                                <h3 style="font-size: 1.5rem;">12</h3>
+                                <p>Active Listings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-calendar-check" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <div class="stat-info">
+                                <h3 style="font-size: 1.5rem;">8</h3>
+                                <p>Active Bookings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-dollar-sign" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <div class="stat-info">
+                                <h3 style="font-size: 1.5rem;">$24,500</h3>
+                                <p>Total Earnings</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="background: var(--light-bg); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-users" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <div class="stat-info">
+                                <h3 style="font-size: 1.5rem;">156</h3>
+                                <p>Total Views</p>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="dashboard-header">
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list" style="margin-top: 1rem;">
+                            <div class="activity-item" style="display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee;">
+                                <i class="fas fa-eye" style="color: var(--primary-color);"></i>
+                                <div>
+                                    <p>Someone viewed your <strong>Toyota Land Cruiser</strong> listing</p>
+                                    <small style="color: var(--text-light);">2 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item" style="display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee;">
+                                <i class="fas fa-envelope" style="color: var(--primary-color);"></i>
+                                <div>
+                                    <p>New message from <strong>Sarah Johnson</strong> about your land listing</p>
+                                    <small style="color: var(--text-light);">5 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item" style="display: flex; gap: 1rem; padding: 1rem;">
+                                <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
+                                <div>
+                                    <p>Booking request for <strong>Mercedes-Benz S-Class</strong> from <strong>Michael Okonkwo</strong></p>
+                                    <small style="color: var(--text-light);">1 day ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <h1>
-            Dashboard
-        </h1>
+                <!-- My Listings Tab -->
+                <div id="listings" class="dashboard-tab" style="display: none;">
+                    <div class="tab-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2>My Listings</h2>
+                        <button class="btn-add-listing" onclick="showAddListingModal()" style="padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-plus"></i> Add New Listing
+                        </button>
+                    </div>
+                    <div class="listings-table" style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: var(--light-bg);">
+                                    <th style="padding: 1rem; text-align: left;">Title</th>
+                                    <th style="padding: 1rem; text-align: left;">Type</th>
+                                    <th style="padding: 1rem; text-align: left;">Price</th>
+                                    <th style="padding: 1rem; text-align: left;">Status</th>
+                                    <th style="padding: 1rem; text-align: left;">Views</th>
+                                    <th style="padding: 1rem; text-align: left;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 1rem;">Toyota Land Cruiser 2023</td>
+                                    <td style="padding: 1rem;">Car</td>
+                                    <td style="padding: 1rem;">Ksh5000/day</td>
+                                    <td style="padding: 1rem;"><span style="background: #4caf50; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">Active</span></td>
+                                    <td style="padding: 1rem;">45</td>
+                                    <td style="padding: 1rem;">
+                                        <button class="btn-edit" style="padding: 0.25rem 0.5rem; background: none; border: none; cursor: pointer;"><i class="fas fa-edit" style="color: var(--primary-color);"></i></button>
+                                        <button class="btn-delete" style="padding: 0.25rem 0.5rem; background: none; border: none; cursor: pointer;"><i class="fas fa-trash" style="color: #dc3545;"></i></button>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 1rem;">Prime Commercial Land</td>
+                                    <td style="padding: 1rem;">Land</td>
+                                    <td style="padding: 1rem;">Ksh200,000/month</td>
+                                    <td style="padding: 1rem;"><span style="background: #ff9800; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">Pending</span></td>
+                                    <td style="padding: 1rem;">28</td>
+                                    <td style="padding: 1rem;">
+                                        <button class="btn-edit" style="padding: 0.25rem 0.5rem; background: none; border: none; cursor: pointer;"><i class="fas fa-edit" style="color: var(--primary-color);"></i></button>
+                                        <button class="btn-delete" style="padding: 0.25rem 0.5rem; background: none; border: none; cursor: pointer;"><i class="fas fa-trash" style="color: #dc3545;"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <!-- Bookings Tab -->
+                <div id="bookings" class="dashboard-tab" style="display: none;">
+                    <h2>My Bookings</h2>
+                    <div class="bookings-list" style="margin-top: 2rem;">
+                        <div class="booking-card" style="display: flex; gap: 1.5rem; padding: 1.5rem; border: 1px solid #eee; border-radius: 12px; margin-bottom: 1rem;">
+                            <img src="https://via.placeholder.com/150x150/2c5f2d/ffffff?text=Car" alt="Booking" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                            <div class="booking-details" style="flex: 1;">
+                                <h3>Toyota Land Cruiser</h3>
+                                <p><i class="fas fa-calendar"></i> Dec 25, 2025 - Jan 5, 2027</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                                <p class="booking-price" style="font-weight: 700; color: var(--primary-color);">Total: $5,500</p>
+                                <span class="booking-status" style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.75rem; background: #4caf50; color: white; border-radius: 20px; font-size: 0.75rem;">Confirmed</span>
+                            </div>
+                            <div class="booking-actions" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <button class="btn-contact" style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border: none; border-radius: 6px; cursor: pointer;">Contact Owner</button>
+                                <button class="btn-cancel" style="padding: 0.5rem 1rem; background: #dc3545; color: white; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="messages" class="dashboard-tab" style="display: none;">
+                    <h2>Messages</h2>
+                    <div class="messages-list" style="margin-top: 2rem;">
+                        <div class="message-item" style="display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer;">
+                            <img src="https://via.placeholder.com/50x50/ff6b35/ffffff?text=SJ" alt="Sender" style="width: 50px; height: 50px; border-radius: 50%;">
+                            <div class="message-content" style="flex: 1;">
+                                <h4>Sarah Johnson <span style="float: right; font-size: 0.75rem; color: var(--text-light);">2 hours ago</span></h4>
+                                <p>I'm interested in your land listing. Is it still available for lease?</p>
+                            </div>
+                        </div>
+                        <div class="message-item" style="display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer;">
+                            <img src="https://via.placeholder.com/50x50/8B4513/ffffff?text=MO" alt="Sender" style="width: 50px; height: 50px; border-radius: 50%;">
+                            <div class="message-content" style="flex: 1;">
+                                <h4>Michael Okonkwo <span style="float: right; font-size: 0.75rem; color: var(--text-light);">1 day ago</span></h4>
+                                <p>Can I schedule a viewing for the Mercedes-Benz?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="stats-grid">
-
-        <div class="stat-card">
-
-            <h2>
-                {{ listing_count }}
-            </h2>
-
-            <p>
-                Listings
-            </p>
-
-        </div>
-
-        <div class="stat-card">
-
-            <h2>
-                {{ booking_count }}
-            </h2>
-
-            <p>
-                Bookings
-            </p>
-
-        </div>
-
-    </div>
-
-    <section class="dashboard-listings">
-
-        <h2>
-            My Listings
-        </h2>
-
-        {% for listing in listings %}
-
-        <div class="dashboard-card">
-
-            <h3>
-                {{ listing.title }}
-            </h3>
-
-            <p>
-                {{ listing.location }}
-            </p>
-
-        </div>
-
-        {% empty %}
-
-        <p>
-            No listings yet.
-        </p>
-
-        {% endfor %}
-
-    </section>
-
 </section>
-
-{% endblock %}
+{% endblock content %}

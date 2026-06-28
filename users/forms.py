@@ -36,6 +36,7 @@ class RegisterForm(UserCreationForm):
             }
         )
         self.fields["password2"].label = "Confirm password"
+        self.fields["password2"].help_text = "Enter the same password as before, for verification."
         self.fields["password2"].widget.attrs.update(
             {
                 "placeholder": "Confirm Password",

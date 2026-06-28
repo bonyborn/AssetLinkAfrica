@@ -1,0 +1,224 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Terms & Conditions | AssetLinkAfrica{% endblock title %}
+
+{% block content %}
+<style>
+.terms-page { background: #f5f5f5; }
+.terms-container { color: #333; }
+.terms-container h1 { color: #2c5f2d; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.terms-container h2 { color: #2c5f2d; font-size: 1.5rem; margin-bottom: 1rem; }
+.terms-container p, .terms-container li { color: #444; line-height: 1.7; }
+.terms-container ul, .terms-container ol { margin-left: 2rem; }
+.terms-container .terms-section { margin-bottom: 2rem; }
+.terms-container .warning-box, .terms-container .info-box, .terms-container .contact-box { padding: 1rem; border-radius: 0.75rem; margin-top: 1rem; }
+.terms-container .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; color: #856404; }
+.terms-container .info-box { background: #d1ecf1; border-left: 4px solid #17a2b8; color: #0c5460; }
+.terms-container .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0; border: 1px solid #dee2e6; }
+.terms-container .data-table th, .terms-container .data-table td { padding: 1rem; border-bottom: 1px solid #eee; }
+.terms-container .data-table th { background: #f8f9fa; font-weight: 600; text-align: left; }
+.terms-container .terms-footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #dee2e6; }
+</style>
+
+<section class="terms-page py-5" style="margin-top: 80px;">
+  <div class="container">
+    <div class="terms-container mx-auto bg-white rounded-4 shadow-sm p-4 p-lg-5" style="max-width: 1000px;">
+      <div class="terms-header text-center mb-5">
+        <h1>Terms & Conditions</h1>
+        <p class="text-muted">Last Updated: January 1, 2026</p>
+      </div>
+
+      <div class="terms-content">
+        <div class="terms-section">
+          <h2>1. Acceptance of Terms</h2>
+          <p>By accessing or using AssetLinkAfrica ("the Platform"), you agree to be bound by these Terms & Conditions. If you do not agree to these terms, please do not use our services.</p>
+        </div>
+
+        <div class="terms-section">
+          <h2>2. Services Provided</h2>
+          <p>AssetLinkAfrica is a digital platform connecting users with car and land listings for lease or purchase. Our services include:</p>
+          <ul>
+            <li>Listing search and discovery</li>
+            <li>Property and vehicle viewing requests</li>
+            <li>Lease and purchase facilitation</li>
+            <li>User dashboard management</li>
+            <li>Messaging between parties</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>3. User Accounts</h2>
+          <p>To access certain features, you must register for an account. You agree to:</p>
+          <ul>
+            <li>Provide accurate and complete information</li>
+            <li>Maintain the security of your account credentials</li>
+            <li>Accept responsibility for all activities under your account</li>
+            <li>Notify us immediately of any unauthorized access</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>4. Listing Guidelines</h2>
+          <p>Users listing assets must adhere to the following guidelines:</p>
+          <ul>
+            <li>Provide accurate and honest descriptions</li>
+            <li>Include clear, unaltered photos of the asset</li>
+            <li>Specify correct pricing and terms</li>
+            <li>Maintain legal ownership or authority to list</li>
+            <li>Comply with local real estate and automotive laws</li>
+          </ul>
+          <div class="warning-box d-flex align-items-start gap-2">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <div><strong>Warning:</strong> False or misleading listings will result in account suspension or termination.</div>
+          </div>
+        </div>
+
+        <div class="terms-section">
+          <h2>5. Transaction Terms</h2>
+          <p>AssetLinkAfrica facilitates connections but does not directly handle payments. Users are responsible for:</p>
+          <ul>
+            <li>Negotiating final terms directly</li>
+            <li>Conducting due diligence before transactions</li>
+            <li>Arranging secure payment methods</li>
+            <li>Handling legal documentation and transfers</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>6. Fees and Commissions</h2>
+          <p>AssetLinkAfrica charges the following fees:</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Basic Listing (1-3 items)</td>
+                <td>Free</td>
+              </tr>
+              <tr>
+                <td>Premium Listing (4+ items)</td>
+                <td>Ksh 6,400/month</td>
+              </tr>
+              <tr>
+                <td>Featured Listing</td>
+                <td>Ksh 11,999/month</td>
+              </tr>
+              <tr>
+                <td>Commission on Sale (for agents)</td>
+                <td>5% of transaction</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="terms-section">
+          <h2>7. User Responsibilities</h2>
+          <p>As a user of AssetLinkAfrica, you agree to:</p>
+          <ul>
+            <li>Comply with all applicable laws and regulations</li>
+            <li>Not use the platform for fraudulent activities</li>
+            <li>Respect other users' privacy and property</li>
+            <li>Not upload malicious code or viruses</li>
+            <li>Not engage in harassment or spam</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>8. Verification Process</h2>
+          <p>AssetLinkAfrica may verify user identities and listings through:</p>
+          <ul>
+            <li>Email and phone verification</li>
+            <li>Government ID submission</li>
+            <li>Proof of ownership documents</li>
+            <li>Property/vehicle inspection</li>
+          </ul>
+          <div class="info-box d-flex align-items-start gap-2">
+            <i class="fas fa-info-circle me-2"></i>
+            <div><strong>Note:</strong> Verified users receive a "Verified" badge and priority listing placement.</div>
+          </div>
+        </div>
+
+        <div class="terms-section">
+          <h2>9. Dispute Resolution</h2>
+          <p>Any disputes arising from the use of AssetLinkAfrica shall be resolved through:</p>
+          <ol>
+            <li>Direct negotiation between parties (7 days)</li>
+            <li>Mediation through AssetLinkAfrica support (14 days)</li>
+            <li>Binding arbitration in Nairobi, Kenya</li>
+          </ol>
+        </div>
+
+        <div class="terms-section">
+          <h2>10. Privacy and Data Protection</h2>
+          <p>We collect and process personal data in accordance with our Privacy Policy. This includes:</p>
+          <ul>
+            <li>Account information (name, email, phone)</li>
+            <li>Transaction history</li>
+            <li>Communication records</li>
+            <li>Usage analytics</li>
+          </ul>
+          <p>We do not sell your personal data to third parties.</p>
+        </div>
+
+        <div class="terms-section">
+          <h2>11. Limitation of Liability</h2>
+          <p>AssetLinkAfrica acts as an intermediary platform. We are not responsible for:</p>
+          <ul>
+            <li>The condition or legality of listed assets</li>
+            <li>Failed or disputed transactions between users</li>
+            <li>Direct or indirect damages from using the platform</li>
+            <li>Third-party links or services</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>12. Account Termination</h2>
+          <p>AssetLinkAfrica reserves the right to suspend or terminate accounts for:</p>
+          <ul>
+            <li>Violation of these Terms & Conditions</li>
+            <li>Fraudulent or illegal activities</li>
+            <li>Harassment of other users</li>
+            <li>False or misleading listings</li>
+            <li>Inactivity for 12+ months</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h2>13. Modifications to Terms</h2>
+          <p>We may update these Terms & Conditions periodically. Users will be notified via:</p>
+          <ul>
+            <li>Email notification</li>
+            <li>Website announcement</li>
+            <li>Dashboard alert</li>
+          </ul>
+          <p>Continued use of the platform constitutes acceptance of modified terms.</p>
+        </div>
+
+        <div class="terms-section">
+          <h2>14. Contact Information</h2>
+          <p>For questions about these Terms & Conditions, contact us at:</p>
+          <div class="contact-box bg-light border border-1 border-secondary rounded-3">
+            <p class="mb-2"><i class="fas fa-envelope me-2" style="color: #2c5f2d;"></i><strong>Email:</strong> legal@assetlinkafrica.com</p>
+            <p class="mb-2"><i class="fas fa-phone me-2" style="color: #2c5f2d;"></i><strong>Phone:</strong> +254 759 919 826</p>
+            <p class="mb-0"><i class="fas fa-map-marker-alt me-2" style="color: #2c5f2d;"></i><strong>Address:</strong> Nairobi Business Park, Nairobi, Kenya</p>
+          </div>
+        </div>
+
+        <div class="terms-footer">
+          <p>By using AssetLinkAfrica, you acknowledge that you have read, understood, and agree to these Terms & Conditions.</p>
+          {% if not user.is_authenticated %}
+            <a href="{% url 'register' %}" class="btn btn-success btn-lg mt-3">I Agree to the Terms</a>
+          {% else %}
+            <a href="{% url 'dashboard' %}" class="btn btn-success btn-lg mt-3">Continue to Dashboard</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

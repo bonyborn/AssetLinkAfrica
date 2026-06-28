@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %} AssetLinkAfrica -Real Estate & Automotive Leasing Platform {% endblock %}</title>
+  <title>{% block title %} AssetLinkAfrica-Real Estate & Automotive Leasing Platform {% endblock %}</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -23,7 +23,8 @@
       <div class="nav-brand">
         <a href="{% url 'home' %}">
           <img src="{% static 'images/logo.png' %}" alt="AssetLinkAfrica" class="logo">
-          <span class="brand-text">AssetLinkAfrica</span>
+          <span class="brand-text">AssetLink<span class="text-success">Africa</span></span>
+
         </a>
       </div>
 
@@ -38,6 +39,7 @@
           <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="{% url 'listings' %}">Listings</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <!-- Profile/Account section aligned to top right -->
         <div class="d-flex align-items-center gap-2 ms-auto">
@@ -88,28 +90,66 @@
     </div>
   {% endif %}
 
-  <footer class="bg-secondary mt-auto py-3 text-center text-light">
-  <div class="container">
+  <footer class="footer-card mt-auto">
+    <div class="container py-5">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="footer-card footer-brand-card p-4">
+            <a href="{% url 'home' %}" class="d-inline-flex align-items-center mb-3 text-decoration-none text-dark">
+              <img src="{% static 'images/logo.png' %}" alt="AssetLinkAfrica" class="me-2" style="width:42px;height:auto;">
+              <span class="fs-5 fw-bold">AssetLink<span class="text-success">Africa</span></span>
+            </a>
+            <p class="small footer-description">Connecting Africans with premium cars and land assets for lease or purchase.</p>
+            <div class="social-links mt-4">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
 
-    <!-- Main footer text -->
-    <div class="row align-items-center">
-      <div class="col-12 col-md-6 text-center text-md-start mb-2 mb-md-0">
-        <p class="mb-0">&copy; 2025 AssetLinkAfrica</p>
-      </div>
+        <div class="col-6 col-md-2">
+          <div class="footer-card p-4">
+            <h6 class="text-black">Quick Links</h6>
+            <ul class="list-unstyled small mb-0">
+              <li><a href="{% url 'home' %}" class="footer-link">Home</a></li>
+              <li><a href="{% url 'listings' %}" class="footer-link">Listings</a></li>
+              <li><a href="{% url 'dashboard' %}" class="footer-link">Dashboard</a></li>
+              <li><a href="{% url 'contact' %}" class="footer-link">Contact</a></li>
+              <li><a href="{% url 'terms' %}" class="footer-link">Terms</a></li>
+              <li><a href="{% url 'privacy' %}" class="footer-link">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
 
-      <!-- Legal Links -->
-      <div class="col-12 col-md-6 text-center text-md-end">
-        <div class="footer-legal">
-          <a href="" class="text-light text-decoration-none">Privacy Policy</a>
-          <span class="mx-2">|</span>
-          <a href=" class="text-light text-decoration-none">Terms of Service</a>
-          <span class="mx-2">|</span>
-          <a href="" class="text-light text-decoration-none">Cookie Policy</a>
+        <div class="col-6 col-md-3">
+          <div class="footer-card p-4">
+            <h6 class="text-black">Legal</h6>
+            <ul class="list-unstyled small mb-0">
+              <li><a href="{% url 'terms' %}" class="footer-link">Terms of Service</a></li>
+              <li><a href="#" class="footer-link">Cookie Policy</a></li>
+              <li><a href="#" class="footer-link">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="footer-card p-4">
+            <h6 class="text-black">Contact Us</h6>
+            <ul class="list-unstyled small mb-0 contact-list">
+              <li>support@assetlinkafrica.com</li>
+              <li>+254 757831176</li>
+              <li>Nairobi, Kenya</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-  </div>
-</footer>
+      <div class="footer-bottom mt-4 pt-4 text-center small">
+        <p class="mb-0">&copy; 2026 AssetLinkAfrica. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

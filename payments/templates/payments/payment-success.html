@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Payment status | AssetLinkAfrica{% endblock %}
+
+{% block extra_head %}
+    {% if payment.status == 'pending' %}
+        <meta http-equiv="refresh" content="10">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="booking-page payment-success-page">
+    <div class="container">
+        <div class="payment-success-card">
+            {% if payment.status == 'paid' %}
+                <span class="payment-success-icon"><i class="fas fa-check" aria-hidden="true"></i></span>
+                <span class="booking-eyebrow">Payment confirmed</span>
+                <h1>Payment successful</h1>
+                <p>Your KES {{ payment.amount|floatformat:0 }} payment for {{ payment.booking.listing.title }} was confirmed by M-Pesa.</p>
+                {% if payment.receipt_number %}
+                    <p class="payment-receipt">M-Pesa receipt: <strong>{{ payment.receipt_number }}</strong></p>
+                {% endif %}
+                <div class="payment-success-actions">
+                    <a class="booking-action" href="{% url 'bookings' %}">View my bookings <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="booking-secondary-link" href="{% url 'dashboard' %}">Go to dashboard</a>
+                </div>
+            {% elif payment.status == 'pending' %}
+                <span class="payment-success-icon payment-pending-icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></span>
+                <span class="booking-eyebrow">Waiting for confirmation</span>
+                {% if payment.checkout_request_id %}
+                    <h1>Approve the M-Pesa prompt</h1>
+                    <p>Enter your M-Pesa PIN on your phone to finish the KES {{ payment.amount|floatformat:0 }} payment. This page updates when Safaricom confirms the result.</p>
+                    <p class="payment-phone">Prompt sent to <strong>{{ payment.phone_number }}</strong></p>
+                {% else %}
+                    <h1>Payment request is processing</h1>
+                    <p>{{ payment.result_description|default:"We are waiting for M-Pesa to confirm whether the request was received. Do not submit another payment; contact support if no prompt arrives." }}</p>
+                {% endif %}
+                <a class="booking-action" href="{% url 'payment_success' payment.id %}">Check payment status</a>
+            {% else %}
+                <span class="payment-failed-icon"><i class="fas fa-times" aria-hidden="true"></i></span>
+                <span class="booking-eyebrow">Payment not completed</span>
+                <h1>M-Pesa payment failed</h1>
+                <p>{{ payment.result_description|default:"The payment was not confirmed. You can try again." }}</p>
+                <div class="payment-success-actions">
+                    <a class="booking-action" href="{% url 'checkout' payment.booking.id %}">Try again</a>
+                    <a class="booking-secondary-link" href="{% url 'bookings' %}">View my bookings</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

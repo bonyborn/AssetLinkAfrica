@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<section class="booking-page">
+    <div class="container">
+        <a class="booking-back-link" href="{% url 'bookings' %}">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to my bookings
+        </a>
+
+        <header class="booking-page-header checkout-page-header">
+            <div>
+                <span class="booking-eyebrow">Booking #{{ booking.id }}</span>
+                <h1>Complete your booking</h1>
+                <p>Pay securely with M-Pesa. You will receive a payment prompt on your phone.</p>
+            </div>
+        </header>
+
+        <div class="checkout-layout">
+            <section class="checkout-panel">
+                <div class="checkout-panel-heading">
+                    <span class="checkout-step">1</span>
+                    <div>
+                        <h2>Payment method</h2>
+                        <p>Choose the phone number that should receive the STK Push prompt.</p>
+                    </div>
+                </div>
+
+                <form method="post" class="checkout-form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="form-group checkout-phone-field">
+                        <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+                        {{ form.phone_number }}
+                        {{ form.phone_number.errors }}
+                        <small>Use a Kenyan number, for example +254712345678. We never ask for your M-Pesa PIN.</small>
+                    </div>
+                    <button class="booking-action checkout-submit" type="submit">
+                        Send M-Pesa prompt <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </section>
+
+            <aside class="checkout-summary">
+                <h2>Booking summary</h2>
+                <a class="checkout-summary-image" href="{% url 'details' booking.listing.id %}">
+                    <img src="{{ booking.listing.image.url }}" alt="{{ booking.listing.title }}">
+                </a>
+                <span class="booking-category">{{ booking.listing.get_category_display }}</span>
+                <h3>{{ booking.listing.title }}</h3>
+                <p class="checkout-summary-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ booking.listing.location }}</p>
+                <div class="checkout-summary-total">
+                    <span>Total</span>
+                    <strong>KES {{ booking.listing.price|floatformat:0 }}</strong>
+                </div>
+                <a class="checkout-summary-link" href="{% url 'details' booking.listing.id %}">View listing details</a>
+            </aside>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

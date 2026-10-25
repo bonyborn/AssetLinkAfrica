@@ -1,0 +1,188 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Home | AssetLinkAfrica{% endblock title %}
+{% block content %}
+        <section class="hero home-hero">
+            <div class="container home-hero-layout">
+                <div class="hero-content home-hero-content">
+                    <span class="home-hero-eyebrow"><i class="fas fa-compass" aria-hidden="true"></i> A better way to find assets</span>
+                    <h1>Find your next <span>Car</span> or <span>piece of land</span> across Africa.</h1>
+                    <p>Explore vehicles and land in one trusted marketplace. Find the right asset, connect with its owner, and take the next step with confidence.</p>
+                    <div class="hero-buttons home-hero-buttons">
+                        <a href="{% url 'listings' %}" class="btn-primary">Explore listings <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="{% if user.is_authenticated %}{% url 'create_listing' %}{% else %}{% url 'login' %}{% endif %}" class="btn-secondary">List your asset</a>
+                    </div>
+                    <div class="home-hero-proof">
+                        <span><i class="fas fa-car-side" aria-hidden="true"></i> Cars</span>
+                        <span><i class="fas fa-mountain-city" aria-hidden="true"></i> Land</span>
+                        <span><i class="fas fa-location-dot" aria-hidden="true"></i> Across Africa</span>
+                    </div>
+                </div>
+
+                <div class="home-hero-visual" aria-label="Explore cars and land">
+                    <div class="home-hero-image-main">
+                        <img src="{% static 'images/suv.jpg' %}" alt="SUV available through the marketplace">
+                        <span class="home-image-label"><i class="fas fa-car-side" aria-hidden="true"></i> Find your next drive</span>
+                    </div>
+                    <div class="home-hero-image-secondary">
+                        <img src="{% static 'images/industrialzone.jpg' %}" alt="Land and development space">
+                        <span class="home-image-label"><i class="fas fa-mountain-city" aria-hidden="true"></i> Discover new ground</span>
+                    </div>
+                    <span class="home-visual-accent" aria-hidden="true"><i class="fas fa-arrow-trend-up"></i></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section home-search-section">
+            <div class="container">
+                <div class="search-card home-search-card">
+                    <div class="home-search-heading">
+                        <span class="home-search-icon"><i class="fas fa-sliders" aria-hidden="true"></i></span>
+                        <div>
+                            <h2>Find the right asset</h2>
+                            <p>Search listings by keyword, location, or type.</p>
+                        </div>
+                    </div>
+                    <form id="searchForm" data-django-search="true" action="{% url 'listings' %}" method="get">
+                        <div class="search-grid home-search-grid">
+                            <div class="form-group">
+                                <label for="assetType">Asset type</label>
+                                <select id="assetType" name="category">
+                                    <option value="">All assets</option>
+                                    <option value="car">Cars</option>
+                                    <option value="land">Land</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" placeholder="Enter location">
+                            </div>
+                            <div class="form-group">
+                                <label for="home-keyword">Keyword</label>
+                                <input type="search" id="home-keyword" name="q" placeholder="e.g. SUV, Nairobi">
+                            </div>
+                            <button type="submit" class="btn-search"><i class="fas fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                    </form>
+                    <div class="home-category-links">
+                        <span>Popular:</span>
+                        <a href="{% url 'listings' %}?category=car"><i class="fas fa-car-side" aria-hidden="true"></i> Cars</a>
+                        <a href="{% url 'listings' %}?category=land"><i class="fas fa-mountain-city" aria-hidden="true"></i> Land</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Listings -->
+        <section class="featured home-featured">
+            <div class="container">
+                <div class="home-section-heading">
+                    <div class="section-header">
+                        <span class="home-section-eyebrow">Picked for you</span>
+                        <h2>Latest listings</h2>
+                        <p>Fresh opportunities from across our marketplace.</p>
+                    </div>
+                    <a href="{% url 'listings' %}" class="home-heading-link">Browse all <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="listings-grid home-listings-grid" id="featuredListings">
+                    {% for listing in latest_listings %}
+                    <article class="listing-card home-listing-card" data-type="{{ listing.category }}" data-price="{{ listing.price }}">
+                        <a class="listing-image home-listing-image" href="{% url 'details' listing.id %}">
+                            <img src="{{ listing.image.url }}" alt="{{ listing.title }}">
+                            <span class="listing-type {{ listing.category }}">{{ listing.get_category_display }}</span>
+                            <span class="home-image-arrow" aria-hidden="true"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                        </a>
+                        <div class="listing-content">
+                            <p class="location home-listing-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ listing.location }}</p>
+                            <h3><a href="{% url 'details' listing.id %}">{{ listing.title }}</a></h3>
+                            <p class="description home-listing-description">{{ listing.description|truncatewords:18 }}</p>
+                            <div class="home-listing-footer">
+                                <p class="price">KES {{ listing.price|floatformat:0 }}<span>Listed price</span></p>
+                                <a href="{% url 'details' listing.id %}" class="btn-details" aria-label="View {{ listing.title }}">View details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <div class="home-empty-listings">
+                        <span><i class="fas fa-house-circle-check" aria-hidden="true"></i></span>
+                        <h3>Your next opportunity starts here</h3>
+                        <p>There are no listings yet. Be the first to share an asset with the community.</p>
+                        <a href="{% if user.is_authenticated %}{% url 'create_listing' %}{% else %}{% url 'login' %}{% endif %}" class="btn-primary">Create a listing</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works home-how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="home-section-eyebrow">Simple from start to finish</span>
+                    <h2>Your next move, made easier</h2>
+                    <p>Find an asset and take the next step in just a few clicks.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step home-step">
+                        <div class="step-icon home-step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <span class="home-step-number">01</span>
+                        <h3>Explore</h3>
+                        <p>Browse vehicles and land, then narrow down by type or location.</p>
+                    </div>
+                    <div class="step home-step">
+                        <div class="step-icon home-step-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <span class="home-step-number">02</span>
+                        <h3>Choose</h3>
+                        <p>Open a listing to review its details and decide what works for you.</p>
+                    </div>
+                    <div class="step home-step">
+                        <div class="step-icon home-step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <span class="home-step-number">03</span>
+                        <h3>Book</h3>
+                        <p>Book your selected asset and follow the steps to complete checkout.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats home-stats">
+            <div class="container">
+                <div class="home-stats-intro">
+                    <span class="home-section-eyebrow">A growing marketplace</span>
+                    <h2>Explore what’s available</h2>
+                    <p>Browse a range of assets and locations in one place.</p>
+                </div>
+                <div class="stats-grid home-stats-grid">
+                    <div class="stat">
+                        <span class="home-stat-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <h3>{{ listing_count }}</h3>
+                        <p>Listings</p>
+                    </div>
+                    <div class="stat">
+                        <span class="home-stat-icon"><i class="fas fa-car-side" aria-hidden="true"></i></span>
+                        <h3>{{ car_count }}</h3>
+                        <p>Cars</p>
+                    </div>
+                    <div class="stat">
+                        <span class="home-stat-icon"><i class="fas fa-mountain-city" aria-hidden="true"></i></span>
+                        <h3>{{ land_count }}</h3>
+                        <p>Land listings</p>
+                    </div>
+                    <div class="stat">
+                        <span class="home-stat-icon"><i class="fas fa-location-dot" aria-hidden="true"></i></span>
+                        <h3>{{ location_count }}</h3>
+                        <p>Locations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

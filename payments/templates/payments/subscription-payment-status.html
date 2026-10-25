@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Subscription Payment | AssetLinkAfrica{% endblock %}
+
+{% block content %}
+<section class="booking-page">
+    <div class="container">
+        <div class="payment-success-card">
+            <span class="booking-eyebrow">{{ payment.plan.get_code_display }} plan</span>
+            <h1>
+                {% if payment.status == 'paid' %}
+                    Subscription active
+                {% elif payment.status == 'failed' %}
+                    Payment not completed
+                {% elif payment.payment_method == 'bank' %}
+                    Transfer awaiting verification
+                {% else %}
+                    Payment awaiting confirmation
+                {% endif %}
+            </h1>
+            <p>Amount: KES {{ payment.amount|floatformat:0 }}</p>
+            <p>Method: {{ payment.get_payment_method_display }}</p>
+
+            {% if payment.status == 'paid' %}
+                {% if payment.subscription.ends_at %}
+                    <p>Your subscription is active through {{ payment.subscription.ends_at|date:"M j, Y" }}.</p>
+                {% endif %}
+                {% if payment.receipt_number %}<p>Receipt: {{ payment.receipt_number }}</p>{% endif %}
+            {% elif payment.payment_method == 'bank' and payment.status == 'pending' %}
+                <p>Transfer reference: {{ payment.bank_transfer_reference }}</p>
+                <p>Your listing limit will change after an administrator confirms the funds.</p>
+                {% if bank_transfer.configured %}
+                    <p><strong>Bank:</strong> {{ bank_transfer.bank_name }}</p>
+                    <p><strong>Account name:</strong> {{ bank_transfer.account_name }}</p>
+                    <p><strong>Account number:</strong> {{ bank_transfer.account_number }}</p>
+                {% endif %}
+            {% elif payment.payment_method == 'mpesa' and payment.status == 'pending' %}
+                <p>Approve the M-Pesa prompt on {{ payment.phone_number }}. The subscription will activate after Safaricom confirms payment.</p>
+            {% elif payment.payment_method == 'card' and payment.status == 'pending' %}
+                <p>Stripe is still confirming your card payment. This page will show the subscription as active after the signed webhook confirms payment.</p>
+            {% elif payment.result_description %}
+                <p>{{ payment.result_description }}</p>
+            {% endif %}
+
+            <a class="booking-action" href="{% url 'subscription_plans' %}">View plans</a>
+            <a class="booking-action booking-action-secondary" href="{% url 'create_listing' %}">Create a listing</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

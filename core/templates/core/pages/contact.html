@@ -1,0 +1,213 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+    <section class="contact-page" style="margin-top: 80px; padding: 60px 0;">
+        <div class="container">
+            <div class="contact-container" style="max-width: 1000px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); padding: 3rem;">
+                
+                <!-- Header -->
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Contact Us</h1>
+                    <p style="font-size: 1.1rem;">Have questions? We're here to help. Reach out to us anytime.</p>
+                </div>
+
+                <!-- Contact Information Cards -->
+                <div class="contact-grid">
+                    <div class="contact-info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Visit Us</h3>
+                        <p>Nairobi Business Park<br>Nairobi, Kenya</p>
+                        <p><small>Monday - Friday, 9am - 6pm</small></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Call Us</h3>
+                        <p>+254 757 831 176</p>
+                        <p>+254 759 919 826</p>
+                        <p><small>Available 24/7 for emergencies</small></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Us</h3>
+                        <p>assetlinkafrica254@gmail.com</p>
+                        <p><small>Response within 24 hours</small></p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Send Us a Message</h2>
+
+                    {% if form.non_field_errors %}
+                        <div id="formAlert" class="alert alert-error is-visible">{{ form.non_field_errors|join:", " }}</div>
+                    {% elif form_success %}
+                        <div id="formAlert" class="alert alert-success is-visible">{{ form_success }}</div>
+                    {% else %}
+                        <div id="formAlert" class="alert"></div>
+                    {% endif %}
+
+                    <form id="contactForm" action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required value="{{ form.fullName.value|default:'' }}" placeholder="Enter your full name">
+                                {% if form.fullName.errors %}
+                                    <div class="form-error" id="fullName-error">{{ form.fullName.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" id="email" name="email" required value="{{ form.email.value|default:'' }}" placeholder="Enter your email">
+                                {% if form.email.errors %}
+                                    <div class="form-error" id="email-error">{{ form.email.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="phone" name="phone" value="{{ form.phone.value|default:'' }}" placeholder="Enter your phone number">
+                                {% if form.phone.errors %}
+                                    <div class="form-error">{{ form.phone.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                <label>Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general" {% if form.subject.value == 'general' %}selected{% endif %}>General Inquiry</option>
+                                    <option value="listing" {% if form.subject.value == 'listing' %}selected{% endif %}>Listing Support</option>
+                                    <option value="booking" {% if form.subject.value == 'booking' %}selected{% endif %}>Booking Issue</option>
+                                    <option value="payment" {% if form.subject.value == 'payment' %}selected{% endif %}>Payment Question</option>
+                                    <option value="account" {% if form.subject.value == 'account' %}selected{% endif %}>Account Management</option>
+                                    <option value="partnership" {% if form.subject.value == 'partnership' %}selected{% endif %}>Partnership Opportunity</option>
+                                    <option value="complaint" {% if form.subject.value == 'complaint' %}selected{% endif %}>Complaint</option>
+                                </select>
+                                {% if form.subject.errors %}
+                                    <div class="form-error">{{ form.subject.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Please provide details about your inquiry...">{{ form.message.value|default:'' }}</textarea>
+                            {% if form.message.errors %}
+                                <div class="form-error">{{ form.message.errors|join:", " }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Priority Level</label>
+                            <select id="priority" name="priority">
+                                <option value="low" {% if form.priority.value == 'low' %}selected{% endif %}>Low - General question</option>
+                                <option value="medium" {% if not form.priority.value or form.priority.value == 'medium' %}selected{% endif %}>Medium - Need assistance</option>
+                                <option value="high" {% if form.priority.value == 'high' %}selected{% endif %}>High - Urgent issue</option>
+                            </select>
+                            {% if form.priority.errors %}
+                                <div class="form-error">{{ form.priority.errors|join:", " }}</div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Business Hours -->
+                <div class="business-hours">
+                    <h3 style="margin-bottom: 1rem;">Business Hours</h3>
+                    <div class="hours-item">
+                        <span>Monday - Friday</span>
+                        <span>9:00 AM - 6:00 PM (EAT)</span>
+                    </div>
+                    <div class="hours-item">
+                        <span>Saturday</span>
+                        <span>10:00 AM - 4:00 PM (EAT)</span>
+                    </div>
+                    <div class="hours-item">
+                        <span>Sunday</span>
+                        <span>Closed (Email support only)</span>
+                    </div>
+                    <div class="hours-item">
+                        <span>Emergency Support</span>
+                        <span>24/7 via phone</span>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.782448055914!2d36.7367822!3d-1.307458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a534e59fddd%3A0x1d21325fd9eaa8bf!2sNairobi%20Business%20Park!5e0!3m2!1sen!2ske!4v1699999999999!5m2!1sen!2ske" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <!-- FAQs -->
+                <div style="margin-top: 2rem;">
+                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <h4>How do I list my asset?</h4>
+                            <p>Login to your dashboard, click "Add New Listing", and follow the step-by-step guide.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>How long does verification take?</h4>
+                            <p>Standard verification takes 24-48 hours. Premium users get priority within 12 hours.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>Is my payment information secure?</h4>
+                            <p>Yes! We use industry-standard encryption and never store your full payment details.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>Can I cancel a booking?</h4>
+                            <p>Yes, cancellations are subject to the asset owner's policy. Contact support for assistance.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>What countries do you serve?</h4>
+                            <p>We currently operate in Kenya, Nigeria, South Africa, Ghana, Uganda, and Tanzania.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>How do I become a verified user?</h4>
+                            <p>Complete identity verification in your dashboard by submitting required documents.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #dee2e6;">
+                    <h3>Connect With Us</h3>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="background: #1877f2; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" style="background: #1da1f2; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" style="background: #0077b5; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" style="background: #e4405f; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" style="background: #25d366; color: white; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'js/contact.js' %}" defer></script>
+{% endblock %}

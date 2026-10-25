@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% block title %}List an Asset{% endblock %}
+
+{% block content %}
+
+<section class="catalog-page">
+    <div class="container">
+        <a class="catalog-back-link" href="{% url 'listings' %}">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to listings
+        </a>
+
+        <div class="listing-create-card">
+            <header class="listing-create-header">
+                <span class="catalog-eyebrow">Share your asset</span>
+                <h1>Create a listing</h1>
+                <p>Add clear details so people can understand, find, and book your asset. Fields that do not apply can be left blank.</p>
+                <p><a href="{% url 'subscription_plans' %}">View listing plans and subscription options</a></p>
+            </header>
+
+            <form class="listing-create-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {% if field.name == 'listing_type' %}
+                        <h2 class="listing-form-section-title">Pricing &amp; listing terms</h2>
+                    {% elif field.name == 'condition' %}
+                        <h2 class="listing-form-section-title">Asset specifications</h2>
+                    {% elif field.name == 'land_dimensions' %}
+                        <h3 class="listing-form-subsection-title" data-listing-category="land">Land details</h3>
+                    {% elif field.name == 'lease_price' %}
+                        <h3 class="listing-form-subsection-title" data-listing-type="lease">Lease / rental terms</h3>
+                    {% elif field.name == 'hire_purchase_deposit' %}
+                        <h3 class="listing-form-subsection-title" data-listing-type="hire_purchase">Hire-purchase terms</h3>
+                    {% elif field.name == 'latitude' %}
+                        <h2 class="listing-form-section-title">Map &amp; media</h2>
+                    {% elif field.name == 'contact_name' %}
+                        <h2 class="listing-form-section-title">Contact details (optional)</h2>
+                    {% elif field.name == 'gallery_images' %}
+                        <h2 class="listing-form-section-title">Photo gallery</h2>
+                    {% endif %}
+                    <div class="form-group{% if field.name == 'vehicle_make' or field.name == 'vehicle_model' or field.name == 'vehicle_trim' or field.name == 'vehicle_year' or field.name == 'vehicle_mileage' or field.name == 'vehicle_mileage_unit' or field.name == 'vehicle_engine_cc' or field.name == 'vehicle_fuel_type' or field.name == 'vehicle_transmission' or field.name == 'vehicle_drive_type' or field.name == 'vehicle_features' %} listing-category-field{% endif %}"
+                         {% if field.name == 'vehicle_make' or field.name == 'vehicle_model' or field.name == 'vehicle_trim' or field.name == 'vehicle_year' or field.name == 'vehicle_mileage' or field.name == 'vehicle_mileage_unit' or field.name == 'vehicle_engine_cc' or field.name == 'vehicle_fuel_type' or field.name == 'vehicle_transmission' or field.name == 'vehicle_drive_type' or field.name == 'vehicle_features' %}data-listing-category="car"{% elif field.name == 'land_dimensions' or field.name == 'land_area' or field.name == 'land_area_unit' or field.name == 'land_tenure' or field.name == 'land_zoning' or field.name == 'land_topography' or field.name == 'land_utilities' or field.name == 'land_proximity' %}data-listing-category="land"{% elif field.name == 'lease_price' or field.name == 'lease_period' or field.name == 'minimum_lease_months' %}data-listing-type="lease"{% elif field.name == 'hire_purchase_deposit' or field.name == 'max_repayment_months' %}data-listing-type="hire_purchase"{% endif %}>
+                        {% if field.name == 'vehicle_make' %}
+                            <h3 class="listing-form-subsection-title">Vehicle details (for cars)</h3>
+                        {% endif %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}<div class="form-help">{{ field.help_text }}</div>{% endif %}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                <p class="form-help">For best results, include accurate specifications, a precise location, and clear photos. Do not include sensitive personal or ownership documents in public images.</p>
+                <button class="catalog-filter-button" type="submit">Publish listing</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    (() => {
+        const categoryField = document.getElementById('id_category');
+        const listingTypeField = document.getElementById('id_listing_type');
+        const locationPrecisionField = document.getElementById('id_location_precision');
+        let locationPrecisionWasSelected = Boolean(
+            categoryField && categoryField.value
+        );
+
+        const updateCategoryFields = () => {
+            document.querySelectorAll('[data-listing-category]').forEach((element) => {
+                element.hidden = element.dataset.listingCategory !== categoryField.value;
+            });
+            if (locationPrecisionField && !locationPrecisionWasSelected) {
+                locationPrecisionField.value = (
+                    categoryField.value === 'land' ? 'approximate' : 'exact'
+                );
+            }
+        };
+
+        const updateListingTypeFields = () => {
+            document.querySelectorAll('[data-listing-type]').forEach((element) => {
+                element.hidden = element.dataset.listingType !== listingTypeField.value;
+            });
+        };
+
+        if (categoryField) {
+            categoryField.addEventListener('change', updateCategoryFields);
+            updateCategoryFields();
+        }
+        if (locationPrecisionField) {
+            locationPrecisionField.addEventListener('change', () => {
+                locationPrecisionWasSelected = true;
+            });
+        }
+        if (listingTypeField) {
+            listingTypeField.addEventListener('change', updateListingTypeFields);
+            updateListingTypeFields();
+        }
+    })();
+</script>
+
+{% endblock %}

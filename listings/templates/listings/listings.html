@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Browse Listings{% endblock %}
+
+{% block content %}
+
+<section class="catalog-page">
+    <div class="container">
+        <header class="catalog-header">
+            <div>
+                <span class="catalog-eyebrow">Find your next opportunity</span>
+                <h1>Explore Listings</h1>
+                <p>Discover cars and land available across Africa.</p>
+            </div>
+            <a class="catalog-create-link" href="{% url 'create_listing' %}">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+                List an asset
+            </a>
+        </header>
+
+        <form class="catalog-filter" method="get" action="{% url 'listings' %}">
+            <div class="catalog-filter-heading">
+                <h2>Find the right asset</h2>
+                <span>Refine your search</span>
+            </div>
+            <div class="catalog-filter-fields">
+                <div class="catalog-field catalog-search-field">
+                    <label for="listing-search">Keyword</label>
+                    <div class="catalog-input-wrap">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input id="listing-search" name="q" value="{{ request.GET.q }}" placeholder="Try a Toyota or a plot">
+                    </div>
+                </div>
+                <div class="catalog-field">
+                    <label for="listing-location">Location</label>
+                    <div class="catalog-input-wrap">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <input id="listing-location" name="location" value="{{ request.GET.location }}" placeholder="City or country">
+                    </div>
+                </div>
+                <div class="catalog-field">
+                    <label for="listing-category">Asset type</label>
+                    <select id="listing-category" name="category">
+                        <option value="">All assets</option>
+                        <option value="car" {% if request.GET.category == 'car' %}selected{% endif %}>Cars</option>
+                        <option value="land" {% if request.GET.category == 'land' %}selected{% endif %}>Land</option>
+                    </select>
+                </div>
+                <div class="catalog-filter-actions">
+                    <button class="catalog-filter-button" type="submit">Search listings</button>
+                    {% if request.GET.q or request.GET.location or request.GET.category %}
+                        <a class="catalog-clear-link" href="{% url 'listings' %}">Clear filters</a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+
+        <div class="catalog-results-heading">
+            <div>
+                <h2>Available assets</h2>
+                <p>{{ listings|length }} result{{ listings|length|pluralize }}</p>
+            </div>
+        </div>
+
+        <div class="listings-grid catalog-grid">
+            {% for listing in listings %}
+                <article class="listing-card catalog-card">
+                    <a class="catalog-card-image" href="{% url 'details' listing.id %}">
+                        <img src="{{ listing.image.url }}" alt="{{ listing.title }}">
+                        <span class="listing-type {{ listing.category }}">{{ listing.get_category_display }}</span>
+                        <span class="catalog-status">{{ listing.get_status_display }}</span>
+                    </a>
+                    <div class="listing-content">
+                        <p class="catalog-card-location">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            {{ listing.location }}
+                        </p>
+                        <h3><a href="{% url 'details' listing.id %}">{{ listing.title }}</a></h3>
+                        <p class="catalog-card-description">{{ listing.description|truncatewords:18 }}</p>
+                        <div class="catalog-card-footer">
+                            <p class="catalog-card-price"><span>Price</span>{{ listing.currency }} {{ listing.price|floatformat:0 }}</p>
+                            <a class="btn-details" href="{% url 'details' listing.id %}" aria-label="View {{ listing.title }}">View details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="catalog-empty">
+                    <span class="catalog-empty-icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <h3>No matching listings</h3>
+                    <p>Try another keyword or broaden your filters to see more assets.</p>
+                    <a class="btn-details" href="{% url 'listings' %}">Browse all listings</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

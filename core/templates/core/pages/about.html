@@ -1,0 +1,194 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="about-page">
+        <div class="container">
+            <div class="about-container">
+
+                <!-- Hero Section -->
+                <div class="about-hero">
+                    <h1>About AssetLinkAfrica</h1>
+                    <p class="about-intro">Transforming the way Africans connect with premium automotive and real estate assets.</p>
+                </div>
+
+                <!-- Our Story -->
+                <div class="about-section">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2024, AssetLinkAfrica was born from a simple observation: Africans across the continent were struggling to find reliable, transparent platforms for leasing or purchasing cars and land. Traditional methods were fragmented, inefficient, and often lacked trust.</p>
+                    <p>We set out to change that. AssetLinkAfrica is more than just a marketplace—it's a movement to democratize asset ownership across Africa. By combining technology with local expertise, we've created a platform that brings transparency, security, and convenience to asset transactions.</p>
+                    <p>Today, we're proud to serve thousands of users across 20+ African cities, connecting asset owners with seekers in a seamless, trustworthy environment.</p>
+                </div>
+
+                <!-- Mission & Vision -->
+                <div class="mission-vision">
+                    <div class="mission-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Our Mission</h3>
+                        <p>To empower Africans by providing a trusted, transparent platform for accessing premium cars and land assets, fostering economic growth and financial independence across the continent.</p>
+                    </div>
+                    <div class="vision-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Our Vision</h3>
+                        <p>To become Africa's most trusted asset marketplace, connecting millions of users with their dream cars and properties while building a legacy of transparency and trust.</p>
+                    </div>
+                </div>
+
+                <!-- Our Values -->
+                <div class="about-section">
+                    <h2 class="about-section-heading">Our Core Values</h2>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Trust & Transparency</h4>
+                            <p>We believe in honest dealings and clear communication in every transaction.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Security</h4>
+                            <p>Your safety and data protection are our top priorities.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-users"></i>
+                            <h4>Community First</h4>
+                            <p>We're building a community that supports African economic growth.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Innovation</h4>
+                            <p>Continuously improving our platform with cutting-edge technology.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-globe-africa"></i>
+                            <h4>Pan-African Focus</h4>
+                            <p>Serving all Africans, from Lagos to Nairobi to Johannesburg.</p>
+                        </div>
+                        <div class="value-card">
+                            <i class="fas fa-heart"></i>
+                            <h4>Customer-Centric</h4>
+                            <p>Your success is our success. We're here for you every step of the way.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stats-container">
+                    <div class="stats-grid-about">
+                        <div class="stat-item">
+                            <h3>1,000+</h3>
+                            <p>Active Users</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Successful Transactions</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>20+</h3>
+                            <p>Cities Covered</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>90%</h3>
+                            <p>Customer Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Our Journey -->
+                <div class="about-section">
+                    <h2>Our Journey</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-content">
+                                <strong>Platform Launch</strong> - AssetLinkAfrica launches with 50+ listings across Kenya
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-content">
+                                <strong>Expansion</strong> - Reached 500+ users
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2026</div>
+                            <div class="timeline-content">
+                                <strong>Innovation</strong>Improved security features, and web app
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2027+</div>
+                            <div class="timeline-content">
+                                <strong>The Future</strong> - Pan-African dominance,Launch verified badges,AI-powered matching, and blockchain verification
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leadership Team -->
+                <div class="about-section team-section">
+                    <h2 class="about-section-heading">Meet Our Leadership</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{% static 'images/CEO.jpg' %}" alt="Boniface Muvea">
+                            </div>
+                            <h3>Boniface Muvea</h3>
+                            <div class="member-title">CEO & Founder</div>
+                            <div class="member-bio">Former real estate executive with 15+ years experience across Africa. Passionate about democratizing asset ownership.</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="{% static 'images/superior.jpg' %}" alt="Boniface Kathu">
+                            </div>
+                            <h3>Boniface Kathu</h3>
+                            <div class="member-title">CTO</div>
+                            <div class="member-bio">Tech innovator and software architect, leading our digital transformation and platform security.</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>Bony Born</h3>
+                            <div class="member-title">COO</div>
+                            <div class="member-bio">Operations expert ensuring smooth transactions and exceptional user experience across all markets.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div class="why-choose">
+                    <h2 class="about-section-heading">Why Choose AssetLinkAfrica?</h2>
+                    <div class="why-choose-grid">
+                        <div>
+                            <i class="fas fa-check-circle" style="color: #2c5f2d; margin-right: 0.5rem;"></i>
+                            <strong>Verified Listings</strong>
+                            <p class="why-choose-detail">Every listing undergoes verification to ensure authenticity.</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle" style="color: #2c5f2d; margin-right: 0.5rem;"></i>
+                            <strong>Secure Transactions</strong>
+                            <p style="margin-top: 0.5rem;">Your data and transactions are protected with enterprise-grade security.</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle" style="color: #2c5f2d; margin-right: 0.5rem;"></i>
+                            <strong>Dedicated Support</strong>
+                            <p style="margin-top: 0.5rem;">24/7 customer support to assist you at every step.</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle" style="color: #2c5f2d; margin-right: 0.5rem;"></i>
+                            <strong>Transparent Pricing</strong>
+                            <p style="margin-top: 0.5rem;">No hidden fees, no surprises—just honest, clear pricing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

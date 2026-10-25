@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Listing Plans | AssetLinkAfrica{% endblock %}
+
+{% block content %}
+<section class="booking-page">
+    <div class="container">
+        <header class="booking-page-header">
+            <div>
+                <span class="booking-eyebrow">Grow your listings</span>
+                <h1>Listing plans</h1>
+                <p>Paid plans are billed monthly. Each payment activates one month of listing access.</p>
+            </div>
+        </header>
+
+        {% if active_subscription %}
+            <p>
+                Current plan: <strong>{{ active_subscription.plan.get_code_display }}</strong>
+                {% if active_subscription.ends_at %}through {{ active_subscription.ends_at|date:"M j, Y" }}{% endif %}
+            </p>
+        {% endif %}
+
+        <div class="listings-grid">
+            {% for plan in plans %}
+                <article class="listing-card">
+                    <div class="listing-content">
+                        <h2>{{ plan.get_code_display }}</h2>
+                        <p>
+                            {% if plan.maximum_listings %}
+                                {{ plan.minimum_listings }}–{{ plan.maximum_listings }} listings
+                            {% else %}
+                                {{ plan.minimum_listings }}+ listings
+                            {% endif %}
+                        </p>
+                        <p class="catalog-card-price">
+                            {% if plan.monthly_price %}KES {{ plan.monthly_price|floatformat:0 }}/month{% else %}Free{% endif %}
+                        </p>
+                        {% if plan.code != 'basic' %}
+                            <a class="catalog-filter-button" href="{% url 'subscription_checkout' plan.code %}">
+                                Choose {{ plan.get_code_display }}
+                            </a>
+                        {% else %}
+                            <p>One listing is included at no charge.</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% empty %}
+                <p>There are no listing plans available right now.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

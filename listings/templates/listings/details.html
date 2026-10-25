@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+
+{% block content %}
+
+<section class="catalog-page">
+    <div class="container">
+        <a class="catalog-back-link" href="{% url 'listings' %}">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to listings
+        </a>
+
+        <article class="listing-detail-card">
+            <div class="listing-detail-image">
+                <img class="listing-cover-image" src="{{ listing.image.url }}" alt="{{ listing.title }}">
+                <span class="listing-type {{ listing.category }}">{{ listing.get_category_display }}</span>
+                {% with gallery=listing.images.all %}
+                    {% if gallery %}
+                        <div class="listing-detail-gallery" aria-label="Additional photos">
+                            {% for photo in gallery %}
+                                <a href="{{ photo.image.url }}" target="_blank" rel="noopener" aria-label="View additional photo {{ forloop.counter }}">
+                                    <img src="{{ photo.image.url }}" alt="{{ listing.title }} - photo {{ forloop.counter }}">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="listing-detail-content">
+                <div class="listing-detail-heading">
+                    <div>
+                        <span class="catalog-eyebrow">{{ listing.get_status_display }}</span>
+                        <h1>{{ listing.title }}</h1>
+                        <p class="catalog-card-location">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            {{ listing.location }}
+                        </p>
+                    </div>
+                    <p class="listing-detail-price">{{ listing.currency }} {{ listing.price|floatformat:0 }}<span>Listed price</span></p>
+                </div>
+
+                <div class="listing-detail-description">
+                    <h2>About this asset</h2>
+                    <p>{{ listing.description|linebreaksbr }}</p>
+                    <dl>
+                        <div><dt>Listing ID</dt><dd>{{ listing.public_id }}</dd></div>
+                        <div><dt>Listing type</dt><dd>{{ listing.get_listing_type_display }}</dd></div>
+                        <div><dt>Verification</dt><dd>{{ listing.get_verification_status_display }}</dd></div>
+                        <div><dt>Currency</dt><dd>{{ listing.currency }}</dd></div>
+                        <div><dt>Listed</dt><dd>{{ listing.created_at|date:"N j, Y" }}</dd></div>
+                        <div><dt>Last updated</dt><dd>{{ listing.updated_at|date:"N j, Y" }}</dd></div>
+                    </dl>
+                </div>
+
+                {% if listing.category == 'car' %}
+                    {% if listing.condition or listing.vehicle_make or listing.vehicle_model or listing.vehicle_trim or listing.vehicle_year or listing.vehicle_mileage or listing.vehicle_engine_cc or listing.vehicle_fuel_type or listing.vehicle_transmission or listing.vehicle_drive_type or listing.vehicle_features %}
+                        <section class="listing-attributes">
+                            <h2>Vehicle details</h2>
+                            <dl>
+                                {% if listing.vehicle_make %}<div><dt>Make</dt><dd>{{ listing.vehicle_make }}</dd></div>{% endif %}
+                                {% if listing.vehicle_model %}<div><dt>Model</dt><dd>{{ listing.vehicle_model }}</dd></div>{% endif %}
+                                {% if listing.vehicle_trim %}<div><dt>Trim / variant</dt><dd>{{ listing.vehicle_trim }}</dd></div>{% endif %}
+                                {% if listing.vehicle_year %}<div><dt>Year</dt><dd>{{ listing.vehicle_year }}</dd></div>{% endif %}
+                                {% if listing.vehicle_mileage != None %}<div><dt>Mileage</dt><dd>{{ listing.vehicle_mileage }} {{ listing.vehicle_mileage_unit }}</dd></div>{% endif %}
+                                {% if listing.condition %}<div><dt>Condition</dt><dd>{{ listing.get_condition_display }}</dd></div>{% endif %}
+                                {% if listing.vehicle_engine_cc %}<div><dt>Engine size</dt><dd>{{ listing.vehicle_engine_cc }} cc</dd></div>{% endif %}
+                                {% if listing.vehicle_fuel_type %}<div><dt>Fuel</dt><dd>{{ listing.get_vehicle_fuel_type_display }}</dd></div>{% endif %}
+                                {% if listing.vehicle_transmission %}<div><dt>Transmission</dt><dd>{{ listing.get_vehicle_transmission_display }}</dd></div>{% endif %}
+                                {% if listing.vehicle_drive_type %}<div><dt>Drive type</dt><dd>{{ listing.get_vehicle_drive_type_display }}</dd></div>{% endif %}
+                            </dl>
+                            {% with features=listing.get_vehicle_features_display %}
+                                {% if features %}<p><strong>Features:</strong> {{ features|join:", " }}</p>{% endif %}
+                            {% endwith %}
+                        </section>
+                    {% endif %}
+                {% elif listing.category == 'land' %}
+                    {% if listing.land_area or listing.land_dimensions or listing.land_tenure or listing.land_zoning or listing.land_topography or listing.land_utilities or listing.land_proximity %}
+                        <section class="listing-attributes">
+                            <h2>Land details</h2>
+                            <dl>
+                                {% if listing.land_dimensions %}<div><dt>Dimensions</dt><dd>{{ listing.land_dimensions }}</dd></div>{% endif %}
+                                {% if listing.land_area %}<div><dt>Size</dt><dd>{{ listing.land_area|floatformat:2 }} {{ listing.get_land_area_unit_display }}</dd></div>{% endif %}
+                                {% if listing.land_tenure %}<div><dt>Ownership / title type</dt><dd>{{ listing.get_land_tenure_display }}</dd></div>{% endif %}
+                                {% if listing.land_zoning %}<div><dt>Zoning / use</dt><dd>{{ listing.get_land_zoning_display }}</dd></div>{% endif %}
+                                {% if listing.land_topography %}<div><dt>Topography / soil</dt><dd>{{ listing.get_land_topography_display }}</dd></div>{% endif %}
+                                {% if listing.land_proximity %}<div><dt>Proximity</dt><dd>{{ listing.land_proximity|linebreaksbr }}</dd></div>{% endif %}
+                            </dl>
+                            {% with utilities=listing.get_land_utilities_display %}
+                                {% if utilities %}<p><strong>Utilities:</strong> {{ utilities|join:", " }}</p>{% endif %}
+                            {% endwith %}
+                        </section>
+                    {% endif %}
+                {% endif %}
+
+                {% if listing.listing_type == 'lease' or listing.listing_type == 'hire_purchase' or listing.deposit_required or listing.bank_finance_allowed %}
+                    <section class="listing-attributes">
+                        <h2>Pricing &amp; terms</h2>
+                        <dl>
+                            {% if listing.listing_type == 'lease' and listing.lease_price %}<div><dt>Lease price</dt><dd>{{ listing.currency }} {{ listing.lease_price|floatformat:2 }} {% if listing.lease_period == 'month' %}per month{% else %}per year{% endif %}</dd></div>{% endif %}
+                            {% if listing.minimum_lease_months %}<div><dt>Minimum lease</dt><dd>{{ listing.minimum_lease_months }} months</dd></div>{% endif %}
+                            {% if listing.deposit_required %}<div><dt>Deposit</dt><dd>{{ listing.currency }} {{ listing.deposit_required|floatformat:2 }}</dd></div>{% endif %}
+                            {% if listing.bank_finance_allowed %}<div><dt>Bank finance</dt><dd>Available</dd></div>{% endif %}
+                            {% if listing.hire_purchase_deposit %}<div><dt>Hire-purchase deposit</dt><dd>{{ listing.currency }} {{ listing.hire_purchase_deposit|floatformat:2 }}</dd></div>{% endif %}
+                            {% if listing.max_repayment_months %}<div><dt>Maximum repayment period</dt><dd>{{ listing.max_repayment_months }} months</dd></div>{% endif %}
+                        </dl>
+                    </section>
+                {% endif %}
+
+                {% if listing.latitude != None and listing.longitude != None and listing.location_precision != 'private' %}
+                    <p class="catalog-card-location">
+                        Map coordinates:
+                        {% if listing.location_precision == 'approximate' %}
+                            Approx. {{ listing.latitude|floatformat:2 }}, {{ listing.longitude|floatformat:2 }}
+                        {% else %}
+                            {{ listing.latitude }}, {{ listing.longitude }}
+                        {% endif %}
+                    </p>
+                {% endif %}
+
+                {% if listing.media_links %}
+                    <section class="listing-attributes">
+                        <h2>Additional media</h2>
+                        <ul>
+                            {% for media_url in listing.media_links %}
+                                <li><a href="{{ media_url }}" target="_blank" rel="noopener noreferrer">View media {{ forloop.counter }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endif %}
+
+                {% if listing.contact_name or listing.contact_phone or listing.contact_email %}
+                    <section class="listing-contact">
+                        <h2>Contact about this asset</h2>
+                        {% if listing.contact_name %}<p>{{ listing.contact_name }}</p>{% endif %}
+                        {% if listing.contact_phone %}<p><a href="tel:{{ listing.contact_phone }}">{{ listing.contact_phone }}</a></p>{% endif %}
+                        {% if listing.contact_email %}<p><a href="mailto:{{ listing.contact_email }}">{{ listing.contact_email }}</a></p>{% endif %}
+                    </section>
+                {% endif %}
+
+                <div class="listing-detail-actions">
+                    {% if listing.status == 'available' and user.is_authenticated %}
+                        <form method="post" action="{% url 'create_booking' listing.id %}">
+                            {% csrf_token %}
+                            <button class="catalog-filter-button" type="submit">Book this asset</button>
+                        </form>
+                    {% elif listing.status == 'available' %}
+                        <a class="catalog-filter-button" href="{% url 'login' %}?next={% url 'details' listing.id %}">Log in to book</a>
+                    {% else %}
+                        <p>This asset is currently booked.</p>
+                    {% endif %}
+                    <a class="catalog-clear-link" href="{% url 'listings' %}">Continue browsing</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Bookings | AssetLinkAfrica{% endblock %}
+
+{% block content %}
+
+<section class="booking-page">
+    <div class="container">
+        <header class="booking-page-header">
+            <div>
+                <span class="booking-eyebrow">Your activity</span>
+                <h1>My bookings</h1>
+                <p>Review your asset bookings and continue to payment when you're ready.</p>
+            </div>
+            <a class="booking-secondary-link" href="{% url 'dashboard' %}">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                Dashboard
+            </a>
+        </header>
+
+        <div class="booking-list">
+            {% for booking in bookings %}
+                <article class="booking-card">
+                    <a class="booking-card-image" href="{% url 'details' booking.listing.id %}">
+                        <img src="{{ booking.listing.image.url }}" alt="{{ booking.listing.title }}">
+                    </a>
+                    <div class="booking-card-content">
+                        <div class="booking-card-heading">
+                            <div>
+                                <span class="booking-category">{{ booking.listing.get_category_display }}</span>
+                                <h2><a href="{% url 'details' booking.listing.id %}">{{ booking.listing.title }}</a></h2>
+                            </div>
+                            <span class="booking-status status-{{ booking.status }}">
+                                <span aria-hidden="true"></span>
+                                {{ booking.get_status_display }}
+                            </span>
+                        </div>
+
+                        <div class="booking-card-meta">
+                            <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ booking.listing.location }}</span>
+                            <span><i class="far fa-calendar" aria-hidden="true"></i> Booked {{ booking.created_at|date:"M j, Y" }}</span>
+                        </div>
+
+                        <div class="booking-card-footer">
+                            <p class="booking-price"><span>Listed price</span>KES {{ booking.listing.price|floatformat:0 }}</p>
+                            {% if booking.status == 'pending' %}
+                                <a class="booking-action" href="{% url 'checkout' booking.id %}">
+                                    Continue to payment <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            {% elif booking.status == 'approved' %}
+                                <a class="booking-action booking-action-secondary" href="{% url 'details' booking.listing.id %}">
+                                    View asset <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            {% else %}
+                                <a class="booking-action booking-action-secondary" href="{% url 'listings' %}">
+                                    Browse other assets <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="booking-empty">
+                    <span class="booking-empty-icon"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+                    <h2>No bookings yet</h2>
+                    <p>When you book an asset, you’ll find its details and payment status here.</p>
+                    <a class="booking-action" href="{% url 'listings' %}">Explore listings <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

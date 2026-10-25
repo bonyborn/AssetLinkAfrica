@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Subscribe to {{ plan.get_code_display }} | AssetLinkAfrica{% endblock %}
+
+{% block content %}
+<section class="booking-page">
+    <div class="container">
+        <a class="booking-back-link" href="{% url 'subscription_plans' %}">Back to listing plans</a>
+        <header class="booking-page-header">
+            <div>
+                <span class="booking-eyebrow">{{ plan.get_code_display }} subscription</span>
+                <h1>Choose a payment method</h1>
+                <p>KES {{ plan.monthly_price|floatformat:0 }} for one month. Your plan activates after payment is verified.</p>
+            </div>
+        </header>
+
+        <section class="checkout-panel">
+            <form method="post" class="checkout-form">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <fieldset class="form-group payment-methods">
+                    <legend>Payment method</legend>
+                    {% for radio in form.payment_method %}
+                        <label class="payment-method" for="{{ radio.id_for_label }}">
+                            {{ radio.tag }}
+                            {% if radio.data.value == 'mpesa' %}
+                                <span class="payment-method-icon mpesa-icon">
+                                    <i class="fas fa-mobile-screen-button" aria-hidden="true"></i>
+                                </span>
+                                <span class="payment-method-copy">
+                                    <strong>{{ radio.choice_label }}</strong>
+                                    <small>Pay securely with an M-Pesa prompt on your phone.</small>
+                                </span>
+                            {% elif radio.data.value == 'card' %}
+                                <span class="payment-method-icon card-icon">
+                                    <i class="fas fa-credit-card" aria-hidden="true"></i>
+                                </span>
+                                <span class="payment-method-copy">
+                                    <strong>{{ radio.choice_label }}</strong>
+                                    <small>
+                                        {% if stripe_configured %}
+                                            Pay securely by credit or debit card.
+                                        {% else %}
+                                            Card checkout is not configured yet.
+                                        {% endif %}
+                                    </small>
+                                </span>
+                            {% else %}
+                                <span class="payment-method-icon bank-icon">
+                                    <i class="fas fa-building-columns" aria-hidden="true"></i>
+                                </span>
+                                <span class="payment-method-copy">
+                                    <strong>{{ radio.choice_label }}</strong>
+                                    <small>
+                                        {% if bank_transfer.configured %}
+                                            Transfer funds and enter your transaction reference.
+                                        {% else %}
+                                            Unavailable until bank details are configured.
+                                        {% endif %}
+                                    </small>
+                                </span>
+                            {% endif %}
+                            <span class="payment-method-check">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                            </span>
+                        </label>
+                    {% endfor %}
+                    {{ form.payment_method.errors }}
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+                    {{ form.phone_number }}
+                    {{ form.phone_number.errors }}
+                    <small>M-Pesa sends a payment prompt to this Kenyan phone number. We never ask for your PIN.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.bank_transfer_reference.id_for_label }}">{{ form.bank_transfer_reference.label }}</label>
+                    {{ form.bank_transfer_reference }}
+                    {{ form.bank_transfer_reference.errors }}
+                    <small>For bank transfers, enter the transaction reference. An administrator must verify receipt before activation.</small>
+                </div>
+
+                <button class="booking-action checkout-submit" type="submit">
+                    Continue to payment <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+        </section>
+
+        <aside class="checkout-summary">
+            <h2>Bank transfer instructions</h2>
+            {% if bank_transfer.configured %}
+                <p><strong>Bank:</strong> {{ bank_transfer.bank_name }}</p>
+                <p><strong>Account name:</strong> {{ bank_transfer.account_name }}</p>
+                <p><strong>Account number:</strong> {{ bank_transfer.account_number }}</p>
+                {% if bank_transfer.branch %}<p><strong>Branch:</strong> {{ bank_transfer.branch }}</p>{% endif %}
+                {% if bank_transfer.swift_code %}<p><strong>SWIFT:</strong> {{ bank_transfer.swift_code }}</p>{% endif %}
+                {% if bank_transfer.instructions %}<p>{{ bank_transfer.instructions }}</p>{% endif %}
+            {% else %}
+                <p>Bank transfers are unavailable until recipient details are configured.</p>
+            {% endif %}
+            {% if not stripe_configured %}
+                <p>Card checkout is not configured yet.</p>
+            {% endif %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

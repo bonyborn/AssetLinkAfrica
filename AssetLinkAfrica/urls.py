@@ -32,6 +32,11 @@ urlpatterns = [
         include('dashboard.urls')
     ),
 
+    path(
+        'users/',
+        include('users.urls')
+    ),
+
 ]
 
 urlpatterns += static(

@@ -1,0 +1,102 @@
+{% load static %}
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+        <!-- LOGO -->
+        <div class="logo-container">
+
+            <a href="{% url 'home' %}"
+               class="logo-link">
+
+                <img src="{% static 'images/logo.png' %}"
+                     alt="AssetLinkAfrica Logo"
+                     class="logo-image">
+
+                <span class="logo-text">
+                    AssetLinkAfrica
+                </span>
+
+            </a>
+
+        </div>
+
+        <!-- NAV LINKS -->
+        <button
+            class="hamburger"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="primary-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-links" id="primary-navigation">
+
+            <li>
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'listings' %}">
+                    Listings
+                </a>
+            </li>
+
+            {% if user.is_authenticated %}
+
+            <li>
+                <a href="{% url 'bookings' %}">
+                    My Bookings
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'create_listing' %}">
+                    List an Asset
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'subscription_plans' %}">
+                    Listing Plans
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </li>
+
+            {% else %}
+
+            <li>
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">
+                    Register
+                </a>
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+</nav>

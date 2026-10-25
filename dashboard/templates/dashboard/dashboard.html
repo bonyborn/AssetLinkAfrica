@@ -1,0 +1,157 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+    <div class="container dashboard-container">
+        <header class="dashboard-welcome">
+            <div>
+                <span class="dashboard-eyebrow">Your AssetLinkAfrica</span>
+                <h1>Welcome back, {{ user.first_name|default:user.username }}</h1>
+                <p>Keep track of your listings and bookings from one place.</p>
+            </div>
+            <a class="dashboard-primary-action" href="{% url 'create_listing' %}">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+                List an asset
+            </a>
+        </header>
+
+        <div class="dashboard-stats">
+            <a class="dashboard-stat-card" href="#my-listings">
+                <span class="dashboard-stat-icon listings-icon"><i class="fas fa-tags" aria-hidden="true"></i></span>
+                <span class="dashboard-stat-copy">
+                    <span class="dashboard-stat-label">My listings</span>
+                    <strong>{{ listing_count }}</strong>
+                </span>
+                <i class="fas fa-arrow-up-right-from-square dashboard-stat-arrow" aria-hidden="true"></i>
+            </a>
+            <a class="dashboard-stat-card" href="{% url 'bookings' %}">
+                <span class="dashboard-stat-icon bookings-icon"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+                <span class="dashboard-stat-copy">
+                    <span class="dashboard-stat-label">My bookings</span>
+                    <strong>{{ booking_count }}</strong>
+                </span>
+                <i class="fas fa-arrow-up-right-from-square dashboard-stat-arrow" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <section class="dashboard-subscription-summary" aria-labelledby="listing-subscription-title">
+            <div class="dashboard-subscription-heading">
+                <span class="dashboard-subscription-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                <div>
+                    <span class="dashboard-eyebrow">Your account</span>
+                    <h2 id="listing-subscription-title">Listing subscription</h2>
+                    <p>Your current plan and listing allowance</p>
+                </div>
+            </div>
+            <div class="dashboard-subscription-details">
+                <div>
+                    <span class="dashboard-subscription-label">Current plan</span>
+                    <strong>{{ listing_plan.get_code_display }}</strong>
+                </div>
+                <div>
+                    <span class="dashboard-subscription-label">Listings used</span>
+                    <strong>{{ listing_count }} of {% if listing_plan.maximum_listings %}{{ listing_plan.maximum_listings }}{% else %}{{ listing_plan.minimum_listings }}+{% endif %}</strong>
+                </div>
+                <div>
+                    <span class="dashboard-subscription-label">Price</span>
+                    <strong>{% if listing_plan.monthly_price %}KES {{ listing_plan.monthly_price|floatformat:0 }}/month{% else %}Free{% endif %}</strong>
+                </div>
+                <div>
+                    <span class="dashboard-subscription-label">Status</span>
+                    <strong>
+                        {% if active_subscription and active_subscription.ends_at %}
+                            Active through {{ active_subscription.ends_at|date:"M j, Y" }}
+                        {% elif active_subscription %}
+                            Active
+                        {% else %}
+                            Free plan
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+            <a class="dashboard-subscription-action" href="{% url 'subscription_plans' %}">
+                View listing plans <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </section>
+
+        <div class="dashboard-main-grid">
+            <section class="dashboard-panel" id="my-listings">
+                <div class="dashboard-panel-heading">
+                    <div>
+                        <h2>My listings</h2>
+                        <p>Assets you have shared on the marketplace</p>
+                    </div>
+                    <a href="{% url 'listings' %}">Browse marketplace <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+
+                <div class="dashboard-listing-list">
+                    {% for listing in listings %}
+                        <article class="dashboard-listing-row">
+                            <div class="dashboard-listing-thumb">
+                                <img src="{{ listing.image.url }}" alt="">
+                            </div>
+                            <div class="dashboard-listing-info">
+                                <h3><a href="{% url 'details' listing.id %}">{{ listing.title }}</a></h3>
+                                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ listing.location }}</p>
+                            </div>
+                            <span class="dashboard-listing-status status-{{ listing.status }}">{{ listing.get_status_display }}</span>
+                            <strong class="dashboard-listing-price">KES {{ listing.price|floatformat:0 }}</strong>
+                            <a class="dashboard-row-link" href="{% url 'details' listing.id %}" aria-label="View {{ listing.title }}">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </article>
+                    {% empty %}
+                        <div class="dashboard-empty">
+                            <span><i class="fas fa-car-side" aria-hidden="true"></i></span>
+                            <h3>Your listings will appear here</h3>
+                            <p>Have an asset to share? Create your first listing and make it visible to the marketplace.</p>
+                            <a class="dashboard-primary-action" href="{% url 'create_listing' %}">Create a listing</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <aside class="dashboard-side-column">
+                <section class="dashboard-panel dashboard-bookings-panel">
+                    <div class="dashboard-panel-heading">
+                        <div>
+                            <h2>Recent bookings</h2>
+                            <p>Your latest booking activity</p>
+                        </div>
+                    </div>
+
+                    {% for booking in bookings|slice:":4" %}
+                        <article class="dashboard-booking-row">
+                            <span class="dashboard-booking-icon"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+                            <div>
+                                <h3><a href="{% url 'bookings' %}">{{ booking.listing.title }}</a></h3>
+                                <p>{{ booking.get_status_display }}</p>
+                            </div>
+                        </article>
+                    {% empty %}
+                        <div class="dashboard-booking-empty">
+                            <p>No bookings yet.</p>
+                            <a href="{% url 'listings' %}">Explore available assets</a>
+                        </div>
+                    {% endfor %}
+
+                    <a class="dashboard-panel-footer-link" href="{% url 'bookings' %}">
+                        View all bookings <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </section>
+
+                <section class="dashboard-tip-card">
+                    <span class="dashboard-tip-icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
+                    <h2>Ready to discover more?</h2>
+                    <p>Explore the marketplace to find cars and land across Africa.</p>
+                    <a href="{% url 'listings' %}">Browse listings <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </section>
+            </aside>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

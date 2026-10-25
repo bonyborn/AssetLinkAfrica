@@ -12,20 +12,44 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from decouple import AutoConfig
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+config = AutoConfig(search_path=BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3-ib*k)z!5ty788wwf^h058yy3vbcytcd2=hf_)4b5-50nmh#j"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+CODESPACE_NAME = config("CODESPACE_NAME", default="")
+CODESPACE_HOST = (
+    f"{CODESPACE_NAME}-8000.app.github.dev" if CODESPACE_NAME else ""
+)
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:8000",
+    "https://127.0.0.1:8000",
+]
+if CODESPACE_HOST:
+    ALLOWED_HOSTS.append(CODESPACE_HOST)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{CODESPACE_HOST}")
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": config("REDIS_URL", default="redis://127.0.0.1:6379/1"),
+        "TIMEOUT": 300,
+        "KEY_PREFIX": "assetlink",
+    }
+}
 
 
 # Application definition
@@ -114,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"
 
 USE_I18N = True
 
@@ -133,3 +157,53 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = 'login'
+
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_BACKEND = config(
+    'EMAIL_BACKEND',
+    default=(
+        'django.core.mail.backends.smtp.EmailBackend'
+        if EMAIL_HOST_USER and EMAIL_HOST_PASSWORD
+        else 'django.core.mail.backends.console.EmailBackend'
+    )
+)
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+DEFAULT_FROM_EMAIL = config(
+    'DEFAULT_FROM_EMAIL',
+    default=EMAIL_HOST_USER or 'AssetLinkAfrica <noreply@assetlinkafrica.com>'
+)
+
+TERMII_API_KEY = config('TERMII_API_KEY', default='')
+TERMII_API_BASE_URL = config(
+    'TERMII_API_BASE_URL',
+    default='https://api.ng.termii.com'
+)
+TERMII_SENDER_ID = config('TERMII_SENDER_ID', default='')
+
+MPESA_API_BASE_URL = config(
+    'MPESA_API_BASE_URL',
+    default='https://sandbox.safaricom.co.ke'
+)
+MPESA_CONSUMER_KEY = config('MPESA_CONSUMER_KEY', default='')
+MPESA_CONSUMER_SECRET = config('MPESA_CONSUMER_SECRET', default='')
+MPESA_SHORTCODE = config('MPESA_SHORTCODE', default='')
+MPESA_PASSKEY = config('MPESA_PASSKEY', default='')
+MPESA_CALLBACK_URL = config('MPESA_CALLBACK_URL', default='')
+MPESA_TRANSACTION_TYPE = config(
+    'MPESA_TRANSACTION_TYPE',
+    default='CustomerPayBillOnline'
+)
+
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='')
+STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
+
+BANK_TRANSFER_BANK_NAME = config('BANK_TRANSFER_BANK_NAME', default='')
+BANK_TRANSFER_ACCOUNT_NAME = config('BANK_TRANSFER_ACCOUNT_NAME', default='')
+BANK_TRANSFER_ACCOUNT_NUMBER = config('BANK_TRANSFER_ACCOUNT_NUMBER', default='')
+BANK_TRANSFER_BRANCH = config('BANK_TRANSFER_BRANCH', default='')
+BANK_TRANSFER_SWIFT_CODE = config('BANK_TRANSFER_SWIFT_CODE', default='')
+BANK_TRANSFER_INSTRUCTIONS = config('BANK_TRANSFER_INSTRUCTIONS', default='')

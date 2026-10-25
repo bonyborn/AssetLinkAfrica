@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Verify Your Account | AssetLinkAfrica{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-form active">
+                <span class="auth-eyebrow">Account security</span>
+                <h2>Verify your email</h2>
+                <p>Your account will be activated after you verify your email. Phone verification is not required.</p>
+
+                {% if email_console_backend %}
+                    <div class="alert alert-warning is-visible" role="status">
+                        Email is in development mode. The verification code appears in the
+                        terminal where Django is running; it is not delivered to your inbox.
+                        Configure SMTP settings to send real email.
+                    </div>
+                {% endif %}
+
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} is-visible" role="status">{{ message }}</div>
+                {% endfor %}
+
+                <div class="form-group">
+                    <strong>Email:</strong> {{ account.email }}
+                    {% if account.email_verified %}
+                        <span>Verified</span>
+                    {% else %}
+                        <span>Not verified</span>
+                        <form method="post" action="{% url 'verify_email' %}">
+                            {% csrf_token %}
+                            {{ email_form.non_field_errors }}
+                            <label for="{{ email_form.code.id_for_label }}">Six-digit email code</label>
+                            {{ email_form.code }}
+                            {{ email_form.code.errors }}
+                            <button class="btn-auth" type="submit">Verify email</button>
+                        </form>
+                        <form method="post" action="{% url 'resend_verification_email' %}">
+                            {% csrf_token %}
+                            <button class="btn-auth" type="submit">Resend email code</button>
+                        </form>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <strong>Phone:</strong> {{ account.phone_number }}
+                    {% if account.phone_verified %}
+                        <span>Verified</span>
+                    {% else %}
+                        <span>Optional; not required to activate your account.</span>
+                        <form method="post" action="{% url 'verify_phone' %}">
+                            {% csrf_token %}
+                            {{ phone_form.non_field_errors }}
+                            <label for="{{ phone_form.code.id_for_label }}">Six-digit SMS code</label>
+                            {{ phone_form.code }}
+                            {{ phone_form.code.errors }}
+                            <button class="btn-auth" type="submit">Verify phone (optional)</button>
+                        </form>
+                        <form method="post" action="{% url 'resend_phone_code' %}">
+                            {% csrf_token %}
+                            <button class="btn-auth" type="submit">Send or resend SMS code (optional)</button>
+                        </form>
+                    {% endif %}
+                </div>
+
+                <div class="auth-footer">
+                    <p>Already verified your email? <a href="{% url 'login' %}">Log in</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

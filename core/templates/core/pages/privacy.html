@@ -1,0 +1,300 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="privacy-page policy-page">
+        <div class="container">
+            <div class="privacy-container policy-container">
+                
+                <div class="privacy-header" style="text-align: center; margin-bottom: 2rem;">
+                    <h1>Privacy Policy</h1>
+                    <p class="last-updated" style="color: #666; margin-top: 0.5rem;">Last Updated: October 18, 2026</p>
+                    <p style="margin-top: 1rem;">Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+                </div>
+
+                <div class="privacy-content">
+                    <!-- Introduction -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>1. Introduction</h2>
+                        <p>AssetLinkAfrica ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform, website, and services.</p>
+                        <div class="info-box">
+                            <i class="fas fa-shield-alt" style="color: #2196f3; margin-right: 0.5rem;"></i>
+                            <strong>Our Commitment:</strong> We are dedicated to being transparent about our data practices and giving you control over your personal information.
+                        </div>
+                    </div>
+
+                    <!-- Information We Collect -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>2. Information We Collect</h2>
+                        <p>We collect various types of information to provide and improve our services:</p>
+                        
+                        <h3>2.1 Personal Information You Provide</h3>
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li><strong>Account Information:</strong> Name, email address, phone number, password</li>
+                            <li><strong>Profile Information:</strong> Profile photo, bio, preferences, location</li>
+                            <li><strong>Listing Information:</strong> Property/vehicle details, photos, pricing, documents</li>
+                            <li><strong>Transaction Information:</strong> Booking history, payment status, and M-Pesa receipt references. We do not collect or store your M-Pesa PIN.</li>
+                            <li><strong>Communication:</strong> Messages, inquiries, support tickets</li>
+                        </ul>
+
+                        <h3>2.2 Information Automatically Collected</h3>
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li><strong>Device Information:</strong> IP address, browser type, operating system</li>
+                            <li><strong>Usage Data:</strong> Pages visited, time spent, search queries, clicks</li>
+                            <li><strong>Location Data:</strong> Approximate location based on IP address</li>
+                            <li><strong>Cookies:</strong> Tracking technologies to enhance user experience</li>
+                        </ul>
+
+                        <h3>2.3 Information from Third Parties</h3>
+                        <ul style="margin-left: 2rem;">
+                            <li>Social media profiles (if you connect your account)</li>
+                            <li>Safaricom M-Pesa (payment processing and transaction status)</li>
+                            <li>Verification services (ID verification)</li>
+                        </ul>
+                    </div>
+
+                    <!-- How We Use Your Information -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>3. How We Use Your Information</h2>
+                        <p>We use your information for the following purposes:</p>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Purpose</th>
+                                    <th>Legal Basis</th>
+                                    <th>Data Used</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Provide and maintain services</td>
+                                    <td>Contract performance</td>
+                                    <td>Account, listing data</td>
+                                </tr>
+                                <tr>
+                                    <td>Process transactions</td>
+                                    <td>Contract performance</td>
+                                    <td>Payment, booking data</td>
+                                </tr>
+                                <tr>
+                                    <td>Communicate with users</td>
+                                    <td>Legitimate interest</td>
+                                    <td>Contact information</td>
+                                </tr>
+                                <tr>
+                                    <td>Improve and personalize experience</td>
+                                    <td>Legitimate interest</td>
+                                    <td>Usage data, preferences</td>
+                                </tr>
+                                <tr>
+                                    <td>Prevent fraud and ensure security</td>
+                                    <td>Legal obligation</td>
+                                    <td>Device, transaction data</td>
+                                </tr>
+                                <tr>
+                                    <td>Comply with legal requirements</td>
+                                    <td>Legal obligation</td>
+                                    <td>Account, verification data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Data Sharing -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>4. Data Sharing and Disclosure</h2>
+                        <p>We do not sell your personal information. We may share your data in the following circumstances:</p>
+                        
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li><strong>With Other Users:</strong> When you list assets or make inquiries, certain information is visible to other users</li>
+                            <li><strong>Service Providers:</strong> Third-party vendors who assist with payment processing, hosting, analytics, and customer support</li>
+                            <li><strong>Legal Requirements:</strong> When required by law, court order, or government regulation</li>
+                            <li><strong>Business Transfers:</strong> In connection with mergers, acquisitions, or asset sales</li>
+                            <li><strong>With Your Consent:</strong> When you explicitly authorize us to share your information</li>
+                        </ul>
+                        
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle" style="color: #ffc107;"></i>
+                            <strong>Important:</strong> When you post listings publicly, your information may be visible to all platform users. Please be mindful of what you share.
+                        </div>
+                    </div>
+
+                    <!-- Data Security -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>5. Data Security</h2>
+                        <p>We implement robust security measures to protect your data:</p>
+                        
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li><strong>Encryption:</strong> SSL/TLS encryption for data transmission</li>
+                            <li><strong>Access Controls:</strong> Strict authentication and authorization protocols</li>
+                            <li><strong>Regular Audits:</strong> Security assessments and vulnerability testing</li>
+                            <li><strong>Data Minimization:</strong> We only collect necessary information</li>
+                            <li><strong>Employee Training:</strong> Regular security awareness training for staff</li>
+                        </ul>
+                        
+                        <div class="success-box">
+                            <i class="fas fa-check-circle" style="color: #4caf50;"></i>
+                            <strong>Security Tip:</strong> Use a strong, unique password for your AssetLinkAfrica account and enable two-factor authentication when available.
+                        </div>
+                    </div>
+
+                    <!-- Your Rights -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>6. Your Privacy Rights</h2>
+                        <p>Depending on your location, you may have the following rights:</p>
+                        
+                        <div class="rights-grid">
+                            <div class="right-card">
+                                <i class="fas fa-eye"></i>
+                                <h4>Right to Access</h4>
+                                <p>Request a copy of your data</p>
+                            </div>
+                            <div class="right-card">
+                                <i class="fas fa-pen"></i>
+                                <h4>Right to Rectify</h4>
+                                <p>Correct inaccurate data</p>
+                            </div>
+                            <div class="right-card">
+                                <i class="fas fa-trash-alt"></i>
+                                <h4>Right to Delete</h4>
+                                <p>Request data deletion</p>
+                            </div>
+                            <div class="right-card">
+                                <i class="fas fa-download"></i>
+                                <h4>Data Portability</h4>
+                                <p>Receive your data in a portable format</p>
+                            </div>
+                            <div class="right-card">
+                                <i class="fas fa-ban"></i>
+                                <h4>Right to Object</h4>
+                                <p>Opt-out of certain processing</p>
+                            </div>
+                            <div class="right-card">
+                                <i class="fas fa-robot"></i>
+                                <h4>Automated Decisions</h4>
+                                <p>Object to automated processing</p>
+                            </div>
+                        </div>
+                        
+                        <p>To exercise these rights, contact us at <strong>assetlinkafrica254@gmail.com</strong>.</p>
+                    </div>
+
+                    <!-- Cookies and Tracking -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>7. Cookies and Tracking Technologies</h2>
+                        <p>We use cookies and similar technologies to enhance your experience:</p>
+                        
+                        <div class="cookie-grid">
+                            <div class="cookie-card">
+                                <i class="fas fa-cookie-bite" style="color: #2c5f2d; font-size: 1.5rem; margin-bottom: 0.5rem; display: inline-block;"></i>
+                                <h4>Essential Cookies</h4>
+                                <p>Required for basic platform functionality</p>
+                                <small>Cannot be disabled</small>
+                            </div>
+                            <div class="cookie-card">
+                                <i class="fas fa-chart-line" style="color: #2c5f2d; font-size: 1.5rem; margin-bottom: 0.5rem; display: inline-block;"></i>
+                                <h4>Analytics Cookies</h4>
+                                <p>Help us understand user behavior</p>
+                                <small>Can be opted out</small>
+                            </div>
+                            <div class="cookie-card">
+                                <i class="fas fa-ad" style="color: #2c5f2d; font-size: 1.5rem; margin-bottom: 0.5rem; display: inline-block;"></i>
+                                <h4>Marketing Cookies</h4>
+                                <p>Used for personalized advertising</p>
+                                <small>Can be opted out</small>
+                            </div>
+                            <div class="cookie-card">
+                                <i class="fas fa-user-check" style="color: #2c5f2d; font-size: 1.5rem; margin-bottom: 0.5rem; display: inline-block;"></i>
+                                <h4>Preference Cookies</h4>
+                                <p>Remember your settings</p>
+                                <small>Can be managed</small>
+                            </div>
+                        </div>
+                        
+                        <p>You can manage cookie preferences through your browser settings.</p>
+                    </div>
+
+                    <!-- Data Retention -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>8. Data Retention</h2>
+                        <p>We retain your personal information for as long as necessary to:</p>
+                        
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li>Provide our services to you</li>
+                            <li>Comply with legal obligations (e.g., tax records for 7 years)</li>
+                            <li>Resolve disputes and enforce agreements</li>
+                            <li>Legitimate business purposes</li>
+                        </ul>
+                        
+                        <p>When data is no longer needed, we securely delete or anonymize it.</p>
+                    </div>
+
+                    <!-- International Data Transfers -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>9. International Data Transfers</h2>
+                        <p>AssetLinkAfrica operates primarily in Africa. Your information may be transferred to and processed in countries where we have operations or service providers.</p>
+                        <p>We ensure appropriate safeguards are in place for such transfers, including standard contractual clauses approved by relevant authorities.</p>
+                    </div>
+
+                    <!-- Children's Privacy -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>10. Children's Privacy</h2>
+                        <p>Our services are not directed to individuals under 18 years of age. We do not knowingly collect personal information from minors. If you believe a minor has provided us with personal information, please contact us immediately.</p>
+                    </div>
+
+                    <!-- Third-Party Links -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>11. Third-Party Links</h2>
+                        <p>Our platform may contain links to third-party websites. We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies before providing any personal information.</p>
+                    </div>
+
+                    <!-- Updates to Policy -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>12. Updates to This Policy</h2>
+                        <p>We may update this Privacy Policy periodically. We will notify you of significant changes through:</p>
+                        
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li>Email notification to registered users</li>
+                            <li>Prominent notice on our website</li>
+                            <li>Dashboard announcement</li>
+                        </ul>
+                        
+                        <p>The "Last Updated" date at the top indicates when changes were made. Continued use of our platform after changes constitutes acceptance of the updated policy.</p>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="privacy-section" style="margin-bottom: 2rem;">
+                        <h2>13. Contact Us</h2>
+                        <p>If you have questions, concerns, or requests regarding this Privacy Policy, please contact our Data Protection Officer:</p>
+                        
+                        <div class="contact-box">
+                            <p style="margin-bottom: 0.75rem;"><i class="fas fa-envelope" style="color: #2c5f2d; width: 30px;"></i> <strong>Email:</strong>assetlinkafrica254@gmail.com</p>
+                            <p style="margin-bottom: 0.75rem;"><i class="fas fa-phone" style="color: #2c5f2d; width: 30px;"></i> <strong>Phone:</strong> +254 757 831 176</p>
+                            <p style="margin-bottom: 0.75rem;"><i class="fas fa-map-marker-alt" style="color: #2c5f2d; width: 30px;"></i> <strong>Address:</strong> Data Protection Office,Nairobi, Kenya</p>
+                            <p><i class="fas fa-clock" style="color: #2c5f2d; width: 30px;"></i> <strong>Response Time:</strong> We aim to respond to all inquiries within 30 days</p>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Process -->
+                    <div class="privacy-section" style="margin-bottom: 1rem;">
+                        <h2>14. Complaint Process</h2>
+                        <p>If you believe we have not addressed your privacy concern adequately, you have the right to lodge a complaint with your local data protection authority.</p>
+                        
+                        <div class="info-box">
+                            <i class="fas fa-gavel" style="color: #2196f3;"></i>
+                            <strong>For Nigerian Users:</strong> You may contact the Nigeria Data Protection Commission (NDPC) at <a href="#" style="color: #2196f3;">www.ndpc.gov.ng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
